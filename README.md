@@ -10,7 +10,7 @@ Telah ditambahkan beberapa method global pada class Controller yaitu:
 3. ajax berfungsi untuk memanggil file ajax
 4. post berfungsi untuk menciptkan variabel post
 
-Terdapat 2 Controllers aktif:
+Terdapat 3 Controllers aktif:
 
 1. Login
 2. Register
