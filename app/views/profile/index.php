@@ -1,15 +1,15 @@
 <?php 
-d($_SESSION);
+// d($_SESSION);
 ?>
 
 <div class="row m-3">
 <h1>Profile</h1>
 </div>
 <div class="row m-3">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="nim"><b>Foto Profil</b></label></br>
-            <img src="<?php $this->model('Profile_model')->getUserImage(); ?>" alt="foto-profil" width="100px"></br>
+            <img src="<?php $this->model('Profile_model')->getUserImage(); ?>" alt="foto-profil" width="100px" id="foto_profile"></br>
             <input type="file" id="foto" name="foto">
         </div>
         <div class="form-group mt-5 mb-2">
@@ -18,7 +18,7 @@ d($_SESSION);
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
-            <input type="number" id="nim" name="nim" data-id="nim" autocomplete="off" disabled>
+            <input type="number" id="nim" name="nim" data-id="nim" autocomplete="off" value="<?= $_SESSION["nim"]; ?>" disabled>
         </div>
         <div class="form-group mb-2">
             <label for="nim">Password</label>
@@ -36,23 +36,42 @@ d($_SESSION);
 
 <script>
     $(function() {
-        $('input').change(function(e) {
+        // $('input').change(function(e) {
+        //     e.preventDefault();
+        //     const column = $(this).data('id');
+        //     var value = $(this).val();
+        //     $.ajax({
+        //         url: 'profile/save',
+        //         method: 'POST',
+        //         data: {
+        //             id : <?= $_SESSION['id'] ?>,
+        //             column : column,
+        //             value : value
+        //         },
+        //         dataType: 'JSON',
+        //         success: function(data){
+        //             console.log(data);
+        //         }
+        //     })
+        // });
+        $('input[type=file]').change(function(e) {
             e.preventDefault();
-            const column = $(this).data('id');
-            var value = $(this).val();
+            var file_data = $("#foto").prop("files")[0];   
+            var form_data = new FormData();
+            form_data.append("foto", file_data);
+            console.log(form_data);
             $.ajax({
-                url: 'profile/save',
-                method: 'POST',
-                data: {
-                    id : <?= $_SESSION['id'] ?>,
-                    column : column,
-                    value : value
-                },
+                url: "profile/saveImage",
                 dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,                         
+                type: 'post',
                 success: function(data){
-                    console.log(data);
+                    $('#foto_profile').attr('src', '<?php $this->model('Profile_model')->getUserImage(); ?>');
                 }
+            });
             })
-        });
     });
 </script>

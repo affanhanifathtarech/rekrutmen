@@ -11,5 +11,10 @@ class Profile extends Controller{
     {
         $this->ajax('ajax-profile');   
     }
+    public function saveImage()
+    {
+        $this->ajax('ajax-profile-image');   
+    }
+    
 
 }

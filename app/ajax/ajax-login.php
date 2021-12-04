@@ -1,5 +1,5 @@
 <?php 
-$data = $this->model('Login_model')->getUser($_POST['nim'], 'nim');
+$data = $this->model('Login_model')->getUser(@$_POST['nim'], 'nim');
 $cek = true;
 
 if(!$data){
