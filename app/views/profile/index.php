@@ -14,7 +14,7 @@ d($_SESSION);
         </div>
         <div class="form-group mt-5 mb-2">
             <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" data-id="nama" autocomplete="off">
+            <input type="text" id="nama" name="nama" data-id="nama">
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
@@ -38,19 +38,19 @@ d($_SESSION);
     $(function() {
         $('input').change(function(e) {
             e.preventDefault();
-            const id = $(this).data('id');
-            var value = $('#' + id + '').val();
+            const column = $(this).data('id');
+            var value = $(this).val();
             $.ajax({
                 url: 'profile/save',
                 method: 'POST',
                 data: {
-                    column : id,
+                    id : <?= $_SESSION['id'] ?>,
+                    column : column,
                     value : value
                 },
                 dataType: 'JSON',
                 success: function(data){
                     console.log(data);
-                    alert(data.data.msg);
                 }
             })
         });

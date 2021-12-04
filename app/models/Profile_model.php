@@ -39,11 +39,12 @@ class Profile_model {
         echo 'public/images/main/logo.webp';
         }
     }
+    
     public function updateDataByColumn($val='', $columnToUpdate='', $id='')
     {
-        $query = "UPDATE " . $this->table . " SET $columnToUpdate = :$columnToUpdate WHERE 'id' = :id)";
+        $query = "UPDATE " . $this->table . " SET `$columnToUpdate` = :val WHERE id = :id";
         $this->db->query($query);
-        $this->db->bind($columnToUpdate, $value);
+        $this->db->bind('val', $val);
         $this->db->bind('id', $id);
         $this->db->execute();
 
