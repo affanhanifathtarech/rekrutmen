@@ -14,3 +14,4 @@ Terdapat 2 Controllers aktif:
 
 1. Login
 2. Register
+3. Profile
