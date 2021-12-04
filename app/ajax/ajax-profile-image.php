@@ -5,6 +5,17 @@
 // 'tmp_name' => string 'C:\xampp\tmp\php7A98.tmp' (length=24)
 // 'error' => int 0
 // 'size' => int 58227
+// if(file_exists('images/main/foto/'. $_SESSION["nim"] . ".$eks")){
+//     file
+// }
+    $fileLamo = $_POST["file_lamo"];
+    $fileLamo = explode('/', $fileLamo);
+    $fileLamo = end($fileLamo);
+
+if(file_exists('images/main/foto/'. $fileLamo)){
+    unlink("images/main/foto/$fileLamo");
+}
+
 $file = $_FILES["foto"];
 // echo var_dump($file);
 $eks = explode('.', $file["name"]);

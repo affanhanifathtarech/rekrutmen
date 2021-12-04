@@ -14,7 +14,7 @@
         </div>
         <div class="form-group mt-5 mb-2">
             <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" data-id="nama">
+            <input type="text" id="nama" name="nama" data-id="nama" class="input_text">
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
@@ -22,11 +22,11 @@
         </div>
         <div class="form-group mb-2">
             <label for="nim">Password</label>
-            <input type="password" id="password" name="password" data-id="password" autocomplete="off">
+            <input type="password" id="password" name="password" data-id="password" autocomplete="off" class="input_text">
         </div>
         <div class="form-group mb-2">
             <label for="nim">No WA</label>
-            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off">
+            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off" class="input_text">
         </div>
 
     </form>
@@ -36,29 +36,31 @@
 
 <script>
     $(function() {
-        // $('input').change(function(e) {
-        //     e.preventDefault();
-        //     const column = $(this).data('id');
-        //     var value = $(this).val();
-        //     $.ajax({
-        //         url: 'profile/save',
-        //         method: 'POST',
-        //         data: {
-        //             id : <?= $_SESSION['id'] ?>,
-        //             column : column,
-        //             value : value
-        //         },
-        //         dataType: 'JSON',
-        //         success: function(data){
-        //             console.log(data);
-        //         }
-        //     })
-        // });
+        $('.input_text').change(function(e) {
+            e.preventDefault();
+            const column = $(this).data('id');
+            var value = $(this).val();
+            $.ajax({
+                url: 'profile/save',
+                method: 'POST',
+                data: {
+                    id : <?= $_SESSION['id'] ?>,
+                    column : column,
+                    value : value
+                },
+                dataType: 'JSON',
+                success: function(data){
+                    console.log(data);
+                }
+            })
+        });
         $('input[type=file]').change(function(e) {
             e.preventDefault();
             var file_data = $("#foto").prop("files")[0];   
             var form_data = new FormData();
+            var imgLink = $('#foto_profile').attr('src');
             form_data.append("foto", file_data);
+            form_data.append("file_lamo", imgLink )
             console.log(form_data);
             $.ajax({
                 url: "profile/saveImage",
@@ -66,11 +68,12 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                data: form_data,                         
+                data: form_data,                      
                 type: 'post',
                 success: function(data){
-                    $('#foto_profile').attr('src', '<?php $this->model('Profile_model')->getUserImage(); ?>');
+                    window.location.href = 'http://localhost/rekrutmen/profile';
                 }
+                
             });
             })
     });
