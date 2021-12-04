@@ -6,3 +6,6 @@ require_once 'core/Database.php';
 require_once 'core/Functions.php';
 
 require_once 'config/config.php';
+
+//for debugging
+require_once 'core/kint.phar';
