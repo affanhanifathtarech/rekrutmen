@@ -1,6 +1,6 @@
 <?php 
 
-class User_model {
+class Profile_model {
 
     private $table = 'user';
     private $db;
@@ -21,5 +21,16 @@ class User_model {
     {
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->getAllData();
+    }
+
+    public function updateDataByColumn($val='', $columnToUpdate='', $id='')
+    {
+        $query = "UPDATE " . $this->table . " SET $columnToUpdate = :$columnToUpdate WHERE 'id' = :id)";
+        $this->db->query($query);
+        $this->db->bind($columnToUpdate, $value);
+        $this->db->bind('id', $id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }
