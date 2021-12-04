@@ -6,4 +6,10 @@ class Profile extends Controller{
         $data['title'] = 'Profile';
         $this->view('profile/index', $data);
     }
+
+    public function save()
+    {
+        $this->ajax('ajax-profile');   
+    }
+
 }

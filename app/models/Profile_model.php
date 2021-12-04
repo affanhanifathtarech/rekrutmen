@@ -23,6 +23,22 @@ class Profile_model {
         return $this->db->getAllData();
     }
 
+    public function getUserImage($nim='')
+    {
+        ($nim=='') ? $nim=$_SESSION['nim'] : '';
+        $ext = ALLOWED_IMAGES_EXT;
+        foreach ($ext as $eks){
+            if (file_exists('images/main/foto/'. $nim . '.' . $eks)) {
+                echo 'public/images/main/foto/' . $nim . '.' . $eks;
+                unset($ext);
+                break;
+            }
+        }
+
+        if (!empty($ext)){
+        echo 'public/images/main/logo.webp';
+        }
+    }
     public function updateDataByColumn($val='', $columnToUpdate='', $id='')
     {
         $query = "UPDATE " . $this->table . " SET $columnToUpdate = :$columnToUpdate WHERE 'id' = :id)";

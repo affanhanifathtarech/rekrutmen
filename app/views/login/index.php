@@ -1,3 +1,4 @@
+<?php d($_SESSION); ?>
 <h1>Halaman Login</h1>
 <form action="" method="post">
     <label for="nim">NIM : </label>
