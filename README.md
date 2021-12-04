@@ -15,3 +15,6 @@ Terdapat 3 Controllers aktif:
 1. Login
 2. Register
 3. Profile
+
+Terdapat function untuk debugging dengan library KINT : https://github.com/kint-php/kint
+- untuk melakukan var_dump gunakanlah function d($variable);
