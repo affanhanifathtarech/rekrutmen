@@ -28,15 +28,15 @@ class Profile_model {
         ($nim=='') ? $nim=$_SESSION['nim'] : '';
         $ext = ALLOWED_IMAGES_EXT;
         foreach ($ext as $eks){
-            if (file_exists('images/main/foto/'. $nim . '.' . $eks)) {
-                echo 'public/images/main/foto/' . $nim . '.' . $eks;
+            if (file_exists('public/images/user/'. $nim . '.' . $eks)) {
+                echo BASEURL . 'public/images/user/' . $nim . '.' . $eks;
                 unset($ext);
                 break;
             }
         }
 
         if (!empty($ext)){
-        echo 'public/images/main/logo.webp';
+        echo BASEURL . 'public/images/logo.webp';
         }
     }
     

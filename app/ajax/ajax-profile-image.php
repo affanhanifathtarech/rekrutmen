@@ -1,14 +1,27 @@
 <?php
+$foto_lama = explode('/', $_POST['foto_lama']);
+$foto_lama = end($foto_lama);
+($foto_lama=='logo.webp') ? $is_default=true : $is_default=false;
+
 $file = $_FILES["foto"];
+
 $eks = explode('.', $file["name"]);
 $eks = strtolower(end($eks));
-$upload = move_uploaded_file($file["tmp_name"], BASEURL . 'images/main/foto/'. $_SESSION["nim"] . ".$eks" );
+$url = 'public/images/user/'. $_SESSION['nim'] . ".$eks";
+
+$upload = move_uploaded_file($file["tmp_name"], $url );
+
+if(!$is_default){
+    unlink('public/images/user/'. $foto_lama );
+}
+
 
 if($upload){
     $out = array(
         "status" => 1,
         "data" => array(
-            "msg" => "Foto berhasil di upload"
+            "msg" => "Foto berhasil di upload",
+            "url" => BASEURL . $url
         )
     );
 

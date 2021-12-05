@@ -54,11 +54,13 @@
                 }
             })
         });
+
         $('input[type=file]').change(function(e) {
             e.preventDefault();
             var file_data = $("#foto").prop("files")[0];   
             var form_data = new FormData();
             form_data.append("foto", file_data);
+            form_data.append("foto_lama", "<?php $this->model('Profile_model')->getUserImage(); ?>");
             $.ajax({
                 url: "profile/saveImage",
                 dataType: 'JSON',
@@ -68,7 +70,11 @@
                 data: form_data,                      
                 type: 'post',
                 success: function(data){
-                    window.location.href = 'http://localhost/rekrutmen/profile';
+                    if (data.status==1){
+                        $('#foto_profile').attr('src', data.data.url);
+                    } else if (data.status==0){
+                        alert(data.data.msg);
+                    }
                 }
                 
             });
