@@ -9,7 +9,7 @@
     <input type="submit" value="Daftar">
 </form>
 
-<?php require_once '../app/views/parts/script.php'; ?>
+<?php require_once 'app/views/parts/script.php'; ?>
 
 <script>
     $(function() {

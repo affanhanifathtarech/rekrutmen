@@ -2,7 +2,7 @@
 $file = $_FILES["foto"];
 $eks = explode('.', $file["name"]);
 $eks = strtolower(end($eks));
-$upload = move_uploaded_file($file["tmp_name"], 'images/main/foto/'. $_SESSION["nim"] . ".$eks" );
+$upload = move_uploaded_file($file["tmp_name"], BASEURL . 'images/main/foto/'. $_SESSION["nim"] . ".$eks" );
 
 if($upload){
     $out = array(

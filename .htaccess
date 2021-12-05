@@ -1,2 +1,6 @@
+Options -Multiviews
+
 RewriteEngine On
-RewriteRule ^(.*)$ public/index.php?url=$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [L]
