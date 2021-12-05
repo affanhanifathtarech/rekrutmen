@@ -1,4 +1,5 @@
-<?php d($_SESSION); ?>
+<?php //css('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">');?>
+
 <h1>Halaman Login</h1>
 <form action="" method="post">
     <label for="nim">NIM : </label>
@@ -8,7 +9,7 @@
     <input type="submit" value="Login">
 </form>
 
-<?php require_once 'app/views/parts/script.php'; ?>
+<?php mainjs(); ?>
 
 <script>
     $(function() {
