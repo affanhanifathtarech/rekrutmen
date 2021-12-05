@@ -14,7 +14,7 @@
         </div>
         <div class="form-group mt-5 mb-2">
             <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" data-id="nama" class="input_text">
+            <input type="text" id="nama" name="nama" data-id="nama" autocomplete="off" class="input-text">
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
@@ -22,11 +22,11 @@
         </div>
         <div class="form-group mb-2">
             <label for="nim">Password</label>
-            <input type="password" id="password" name="password" data-id="password" autocomplete="off" class="input_text">
+            <input type="password" id="password" name="password" data-id="password" autocomplete="off" class="input-text">
         </div>
         <div class="form-group mb-2">
             <label for="nim">No WA</label>
-            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off" class="input_text">
+            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off" class="input-text">
         </div>
 
     </form>
@@ -36,9 +36,9 @@
 
 <script>
     $(function() {
-        $('.input_text').change(function(e) {
+        $('.input-text').change(function(e) {
             e.preventDefault();
-            const column = $(this).data('id');
+            var column = $(this).data('id');
             var value = $(this).val();
             $.ajax({
                 url: 'profile/save',
@@ -58,10 +58,7 @@
             e.preventDefault();
             var file_data = $("#foto").prop("files")[0];   
             var form_data = new FormData();
-            var imgLink = $('#foto_profile').attr('src');
             form_data.append("foto", file_data);
-            form_data.append("file_lamo", imgLink )
-            console.log(form_data);
             $.ajax({
                 url: "profile/saveImage",
                 dataType: 'JSON',
