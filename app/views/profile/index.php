@@ -1,5 +1,7 @@
 <?php 
 // d($_SESSION);
+$data = $this->model("Profile_model")->getUser($_SESSION["id"]);
+
 ?>
 
 <div class="row m-3">
@@ -14,7 +16,7 @@
         </div>
         <div class="form-group mt-5 mb-2">
             <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" data-id="nama" autocomplete="off" class="input-text">
+            <input type="text" id="nama" name="nama" data-id="nama" autocomplete="off" class="input-text" value="<?= $data["nama"];?>">
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
@@ -22,11 +24,11 @@
         </div>
         <div class="form-group mb-2">
             <label for="nim">Password</label>
-            <input type="password" id="password" name="password" data-id="password" autocomplete="off" class="input-text">
+            <input type="password" id="password" name="password" data-id="password" autocomplete="off" class="input-text" value="<?= $data["password"]; ?>">
         </div>
         <div class="form-group mb-2">
             <label for="nim">No WA</label>
-            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off" class="input-text">
+            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off" class="input-text" value="<?= $data["wa"]; ?>">
         </div>
 
     </form>
