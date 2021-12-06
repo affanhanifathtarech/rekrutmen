@@ -25,6 +25,7 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
             <td>Jurusan : </td>
             <td>
                 <select name="jurusan" id="jurusan">
+                    <!-- <option selected value="<?= $data["jurusan"] ?>"><?= $data["jurusan"]; ?></option> -->
                     <option value="Teknik Komputer">Teknik Komputer</option>
                     <option value="Teknik Elektro">Teknik Elektro</option>
                     <option value="Teknik Sipil">Teknik Sipil</option>
