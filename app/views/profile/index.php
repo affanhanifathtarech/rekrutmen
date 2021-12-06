@@ -1,5 +1,7 @@
 <?php 
 // d($_SESSION);
+$data = $this->model("Profile_model")->getUser($_SESSION["id"]);
+
 ?>
 
 <div class="row m-3">
