@@ -3,7 +3,7 @@
     
 <main class="form-signin">
   <form>
-    <img class="mb-5" src="public/images/logo.webp" alt="logo" width="100">
+    <img class="mb-5" src="public/images/logo.png" alt="logo" width="100">
 
     <div class="form-floating mb-2">
       <input type="number" class="form-control" id="nim" autocomplete="off" placeholder="06213031xxxx">
