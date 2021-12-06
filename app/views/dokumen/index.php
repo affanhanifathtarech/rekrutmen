@@ -1,24 +1,21 @@
-<div class="row">
-    <div class="col-lg-6">
-        <h3>Upload File Rekomendasi HMJ</h3>
-        <form action="" method="post" enctype="multipart/form-data">
-            <input type="file" name="file_rekomendasi" id="file_rekomendasi">
-    </div>
-</div>
-<br><br><br>
-<div class="row">
-    <div class="col-lg-6">
-        <h3>Upload File Sertifikat Pendukung ( Optional )</h3>
-            <input type="file" name="file_sertifikat[]" id="file_sertifikat" multiple>
-        </form>
-    </div>
+<?php 
+$glob = glob('public/dokumen/rekomendasi/'. $_SESSION['nim'] . ".*");
+$display = (empty($glob)) ? 'style="display:none;"' : '';
+$link = (empty($glob)) ? '' : $glob[0] ;
+?>
 
-    <div class="col-lg-6">
-        <ul>
-            <li>File Sertifikat 1</li>
-            <li>File Sertifikat 2</li>
-            <li>File Sertifikat 3</li>
-        </ul>
+<div class="container p-3">
+    <h1 class="h3 mb-3">Dokumen</h1>
+    <div class="mb-5">
+        <label for="file_rekomendasi" class="form-label">Upload File Rekomendasi HMJ</label>
+        <input class="form-control" type="file" id="file_rekomendasi">
+        <div class="d-grid gap-2 d-md-block mt-2">
+            <a href="<?= $link;?>" target='_BLANK' class="btn btn-info rekomendasi" <?= $display ?>>Lihat Dokumen</a>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="file_serfikat" class="form-label">Upload File Sertifikat Pendukung ( Optional )</label>
+        <input class="form-control" type="file" name="file_sertifikat[]" id="file_sertifikat" multiple>
     </div>
 </div>
 
@@ -29,10 +26,8 @@
         $('input[type=file]').change(function(e) {
             e.preventDefault();
             var file_data = $("#file_rekomendasi").prop("files")[0];   
-            // var foto_lama = $("#file_rekomendasi").attr('src');
             var form_data = new FormData();
             form_data.append("file_rekomendasi", file_data);
-            // form_data.append("file_rekomendasi_lamo", foto_lama);
             $.ajax({
                 url: "dokumen/saveDokumen",
                 dataType: 'JSON',
@@ -42,12 +37,9 @@
                 data: form_data,                      
                 type: 'post',
                 success: function(data){
-                    // if (data.status==1){
-                    //     $('#foto_profile').attr('src', data.data.url);
-                    // } else if (data.status==0){
-                    //     alert(data.data.msg);
-                    // }
-                    console.log(data);
+                    if(data.status==1){
+                        $('.rekomendasi').attr('href', data.data.url);
+                    }
                 }
              });
         });
