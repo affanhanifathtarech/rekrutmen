@@ -8,4 +8,6 @@ class Dokumen extends Controller {
     public function saveDokumen(){
         $this->ajax('ajax-save-dokumen');
     }
+
+  
 }

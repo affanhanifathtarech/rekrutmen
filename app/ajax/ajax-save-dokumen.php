@@ -8,7 +8,8 @@
 $file = $_FILES["file_rekomendasi"];
 $eks = explode('.', $file["name"]);
 $eks = strtolower(end($eks));
-$url = 'public/dokumen/rekomendasi/'. $_SESSION['nim'] . ".$eks";
+$url = 'public/dokumen/rekomendasi/'. $_SESSION["nama"]
+ .$_SESSION['nim'] . ".$eks";
 
 $upload = move_uploaded_file($file["tmp_name"], $url );
 

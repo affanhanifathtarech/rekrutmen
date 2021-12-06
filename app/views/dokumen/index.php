@@ -4,6 +4,9 @@
         <form action="" method="post" enctype="multipart/form-data">
             <input type="file" name="file_rekomendasi" id="file_rekomendasi">
     </div>
+    <div class="col-lg-6">
+        <a href="<?= $this->model('Dokumen_model')->getFileRekomendasi(); ?>"> </a>
+    </div>
 </div>
 <br><br><br>
 <div class="row">
