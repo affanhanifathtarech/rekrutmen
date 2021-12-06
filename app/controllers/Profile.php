@@ -8,7 +8,7 @@ class Profile extends Controller{
             die;
         }
         
-        $data = $this->model('Profile_model')->getUser($_SESSION['nim'], 'nim', $selectColumn='*');
+        $data = $this->model('Profile_model')->getUser($_SESSION['nim'], 'nim');
         $data['title'] = 'Profil - LDK Karisma';
         $this->view('profile/index', $data);
     }

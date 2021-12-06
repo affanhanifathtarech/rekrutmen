@@ -130,7 +130,9 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
         </tr>
     </table>
 </form>
-<?php mainjs(); ?>
+
+<?php require_once 'app/views/parts/mainjs.php'; ?>
+
 <script>
     $(function() {
         $('input').on('change', function(e) {

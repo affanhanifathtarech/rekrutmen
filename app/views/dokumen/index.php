@@ -24,7 +24,9 @@
         </ul>
     </div>
 </div>
-<?php mainjs() ?>
+
+<?php require_once 'app/views/parts/mainjs.php'; ?>
+
 <script>
     $(function(){
         $('input[type=file]').change(function(e) {

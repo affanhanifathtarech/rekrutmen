@@ -1,5 +1,5 @@
 <!-- Custom styles for this template -->
-<?php css('<link href="public/assets/pages/login-signup/style.css" rel="stylesheet">'); ?>
+<link href="public/assets/pages/login-signup/style.css" rel="stylesheet">
     
 <main class="form-signin">
   <form>
@@ -23,7 +23,7 @@
   </form>
 </main>
 
-<?php mainjs(); ?>
+<?php require_once 'app/views/parts/mainjs.php'; ?>
 
 <script> 
     $(function() {

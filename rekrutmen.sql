@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 04:51 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Dec 06, 2021 at 10:50 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,7 +59,8 @@ CREATE TABLE `biodata` (
 --
 
 INSERT INTO `biodata` (`id`, `nim`, `nama`, `jk`, `jurusan`, `prodi`, `kelas`, `angkatan`, `tempat_lahir`, `tanggal_lahir`, `goldar`, `anak_ke`, `ayah`, `ibu`, `kerja_ayah`, `kerja_ibu`, `status_tinggal`, `status_kelas`, `liqo`, `organisasi`, `hobi`, `email`, `status_pendidikan`, `alasan_gabung`) VALUES
-(1, '0293029', 'Irpan', 'Laki-Laki', 'Teknik Komputer', 'Teknologi Informatika dan Multimedia Digital', '1 TIA', 2021, 'Air Itam', '2019-10-16', 'O+', '6', 'Mahari', 'Asia', 'Petani', 'Petani', 'Kosan', 'Maba', 'KSM', 'OSIS', 'Membaca', 'dia@gmail.com', 'Mahasiswa', 'ingin meningkatkan pemahaman agama');
+(1, '061830311271', 'M Rizwa', 'Laki-Laki', 'Teknik Komputer', 'Teknologi Informatika dan Multimedia Digital', '1 TIA', 2021, 'Air Itam', '2019-10-16', 'O+', '6', 'Mahari', 'Asia', 'Petani', 'Petani', 'Kosan', 'Maba', 'KSM', 'OSIS', 'Membaca', 'dia@gmail.com', 'Mahasiswa', 'ingin meningkatkan pemahaman agama'),
+(2, '061830311274', 'Affan Hanif', 'Laki-Laki', 'Teknik Komputer', 'Teknologi Informatika dan Multimedia Digital', '1 TIA', 2021, 'Air Itam', '2019-10-16', 'O+', '6', 'Mahari', 'Asia', 'Petani', 'Petani', 'Kosan', 'Maba', 'KSM', 'OSIS', 'Membaca', 'dia@gmail.com', 'Mahasiswa', 'ingin meningkatkan pemahaman agama');
 
 -- --------------------------------------------------------
 
@@ -70,18 +71,17 @@ INSERT INTO `biodata` (`id`, `nim`, `nama`, `jk`, `jurusan`, `prodi`, `kelas`, `
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `nim` varchar(20) NOT NULL,
-  `nama` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `wa` varchar(15) NOT NULL
+  `wa` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nim`, `nama`, `password`, `wa`) VALUES
-(1, '7498234', '', '123', '82376227823'),
-(2, '0293029', 'Irpansyah Ganteng', '123456', '898987');
+INSERT INTO `user` (`id`, `nim`, `password`, `wa`) VALUES
+(10, '061830311274', 'athtarech', '082269599529'),
+(11, '061830311271', 'athtarech', '08226959952');
 
 --
 -- Indexes for dumped tables
@@ -92,14 +92,15 @@ INSERT INTO `user` (`id`, `nim`, `nama`, `password`, `wa`) VALUES
 --
 ALTER TABLE `biodata`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `biodata_ibfk_1` (`nim`);
+  ADD KEY `nim` (`nim`),
+  ADD KEY `nama` (`nama`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `nim` (`nim`);
+  ADD UNIQUE KEY `nim` (`nim`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -109,13 +110,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `biodata`
 --
 ALTER TABLE `biodata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -125,7 +126,7 @@ ALTER TABLE `user`
 -- Constraints for table `biodata`
 --
 ALTER TABLE `biodata`
-  ADD CONSTRAINT `biodata_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `user` (`nim`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `biodata_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `user` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

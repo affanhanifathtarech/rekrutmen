@@ -1,7 +1,5 @@
 <?php 
 // d($_SESSION);
-$data = $this->model("Profile_model")->getUser($_SESSION["id"]);
-
 ?>
 
 <div class="row m-3">
@@ -16,7 +14,7 @@ $data = $this->model("Profile_model")->getUser($_SESSION["id"]);
         </div>
         <div class="form-group mt-5 mb-2">
             <label for="nama">Nama</label>
-            <input type="text" data-id="nama" autocomplete="off" class="input-text" value="<?= $data["nama"]; ?>">
+            <input type="text" data-id="nama" autocomplete="off" class="input-text" value="">
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
@@ -34,7 +32,7 @@ $data = $this->model("Profile_model")->getUser($_SESSION["id"]);
     </form>
 </div>
 
-<?php mainjs(); ?>
+<?php require_once 'app/views/parts/mainjs.php'; ?>
 
 <script>
     $(function() {
