@@ -129,14 +129,10 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
         </tr>
     </table>
 </form>
-<?php require_once 'app/views/parts/script.php'; ?>
+<?php mainjs(); ?>
 <script>
-    document.getElementById('nama').addEventListener('change', function(){
-        alert('ok');
-    })
     $(function() {
-        $('.input-text').on('keyup', function(e) {
-            alert('ok');
+        $('input').on('change', function(e) {
             e.preventDefault();
             var column = $(this).attr('id');
             var value = $(this).val();
@@ -144,7 +140,7 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
                 url: 'biodata/update',
                 method: 'POST',
                 data: {
-                    id : <?= $_SESSION['id'] ?>,
+                    id : <?= $data['id']; ?>,
                     column : column,
                     value : value
                 },

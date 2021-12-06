@@ -12,14 +12,16 @@ class Biodata_model {
         return $this->db->getData();
     }
 
-    public function updateBiodataByColumn($val='', $columnToUpdate='', $id='')
+    public function updateBiodataByColumn($data)
     {
-        $query = "UPDATE " . $this->table . " SET `$columnToUpdate` = :val WHERE id = :id";
+        $col = $data["column"];
+        $val = $data["value"];
+        $id = $data["id"];
+        $query = "UPDATE " . $this->table . " SET $col = :val WHERE id = :id";
         $this->db->query($query);
         $this->db->bind('val', $val);
         $this->db->bind('id', $id);
         $this->db->execute();
-
         return $this->db->rowCount();
     }
  
