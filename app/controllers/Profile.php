@@ -3,7 +3,13 @@
 class Profile extends Controller{
     public function index()
     {
-        $data['title'] = 'Profile';
+        if(!isset($_SESSION['nim'])){
+            echo 'Sorry. Login dulu ya';
+            die;
+        }
+        
+        $data = $this->model('Profile_model')->getUser($_SESSION['nim'], 'nim', $selectColumn='*');
+        $data['title'] = 'Profil - LDK Karisma';
         $this->view('profile/index', $data);
     }
 

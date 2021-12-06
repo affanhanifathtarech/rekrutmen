@@ -1,13 +1,27 @@
-<h1>Mendaftar</h1>
-<form action="" method="post">
-    <label for="nim">NIM : </label>
-    <input type="number" id="nim" name="nim" autocomplete="off">
-    <label for="password">Password : </label>
-    <input type="password" id="password" name="password" autocomplete="off">
-    <label for="wa">No Wa : </label>
-    <input type="number" id="wa" name="wa" autocomplete="off">
-    <input type="submit" value="Daftar">
-</form>
+<!-- Custom styles for this template -->
+<?php css('<link href="public/assets/pages/login-signup/style.css" rel="stylesheet">'); ?>
+    
+<main class="form-signin">
+  <form>
+    <img class="mb-5" src="public/images/logo.webp" alt="logo" width="100">
+
+    <div class="form-floating mb-2">
+      <input type="number" class="form-control" id="nim" autocomplete="off" placeholder="06213031xxxx">
+      <label for="nim">NIM</label>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="number" class="form-control" id="wa" autocomplete="off" placeholder="08125523xxxx">
+      <label for="wa">No Whatsapp</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="password" autocomplete="new-password" placeholder="Password">
+        <label for="password">Password</label>
+    </div>
+
+    <input class="w-100 btn btn-lg btn-primary mt-3" type="submit" value="Daftar">
+    <p class="mt-5 mb-3 text-muted">LDK Karisma &copy; 2021</p>
+  </form>
+</main>
 
 <?php mainjs(); ?>
 
@@ -28,7 +42,6 @@
                 },
                 dataType: 'JSON',
                 success: function(data){
-                    console.log(data);
                     alert(data.data.msg);
                 }
             })

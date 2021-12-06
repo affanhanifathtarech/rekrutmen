@@ -3,7 +3,7 @@
 class Login extends Controller{
     public function index()
     {
-        $data['title'] = 'Login';
+        $data['title'] = 'Login - LDK Karisma';
         $this->view('login/index', $data);
     }
 
