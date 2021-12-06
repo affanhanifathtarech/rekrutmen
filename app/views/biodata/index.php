@@ -135,7 +135,7 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
 
 <script>
     $(function() {
-        $('input').on('change', function(e) {
+        $('input').change(function(e) {
             e.preventDefault();
             var column = $(this).attr('id');
             var value = $(this).val();
