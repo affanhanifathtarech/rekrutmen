@@ -9,6 +9,7 @@ class Profile extends Controller{
         }
         
         $data = $this->model('Profile_model')->getUser($_SESSION['nim'], 'nim');
+        $data['nama'] = $this->model('Biodata_model')->getDataUser($_SESSION['nim'], 'nim', 'nama')['nama'];
         $data['title'] = 'Profil - LDK Karisma';
         $this->view('profile/index', $data);
     }
