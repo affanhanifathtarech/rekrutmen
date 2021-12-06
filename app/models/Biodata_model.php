@@ -19,7 +19,6 @@ class Biodata_model {
         $this->db->bind('val', $val);
         $this->db->bind('updatedColumnVal', $updatedColumnVal);
         $this->db->execute();
-
         return $this->db->rowCount();
     }
  
