@@ -54,11 +54,16 @@
 </div>
 <div class="form-group mb-2">
     <label for="tanggal_lahir">Tanggal Lahir</label>
-    <input type="text" class="form-control" id="tanggal_lahir" value="<?= $data["tanggal_lahir"]; ?>">
+    <input type="date" class="form-control" id="tanggal_lahir" value="<?= $data["tanggal_lahir"]; ?>">
 </div>
 <div class="form-group mb-2">
     <label for="goldar">Golongan Darah</label>
-    <input type="text" class="form-control" id="goldar" value="<?= $data["goldar"]; ?>">
+    <select class="form-control" name='goldar' id='goldar'>
+        <option <?= ($data["goldar"]=='A') ? 'selected' : ''?> value="A">A</option>
+        <option <?= ($data["goldar"]=='B') ? 'selected' : ''?> value="B">B</option>
+        <option <?= ($data["goldar"]=='AB') ? 'selected' : ''?> value="AB">AB</option>
+        <option <?= ($data["goldar"]=='O') ? 'selected' : ''?> value="O">O</option>
+    </select>
 </div>
 <div class="form-group mb-2">
     <label for="anak_ke">Anak ke</label>
