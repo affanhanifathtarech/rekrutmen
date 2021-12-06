@@ -3,7 +3,7 @@
 class Register extends Controller{
     public function index()
     {
-        $data['title'] = 'Register';
+        $data['title'] = 'Pendaftaran - LDK Karisma';
         $this->view('register/index', $data);
     }
 

@@ -2,7 +2,7 @@
 
 class Biodata extends Controller {
     public function index(){
-        $data['title'] = 'Biodata';
+        $data['title'] = 'Biodata - LDK Karisma';
         $this->view('biodata/index', $data);
     }
 
