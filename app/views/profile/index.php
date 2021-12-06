@@ -14,19 +14,19 @@
         </div>
         <div class="form-group mt-5 mb-2">
             <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" data-id="nama" autocomplete="off" class="input-text">
+            <input type="text" data-id="nama" autocomplete="off" class="input-text" value="<?= $data["nama"]; ?>">
         </div>
         <div class="form-group mb-2">
             <label for="nim">NIM</label>
-            <input type="number" id="nim" name="nim" data-id="nim" autocomplete="off" value="<?= $_SESSION["nim"]; ?>" disabled>
+            <input type="number" data-id="nim" autocomplete="off" value="<?= $data["nim"]; ?>" disabled>
         </div>
         <div class="form-group mb-2">
             <label for="nim">Password</label>
-            <input type="password" id="password" name="password" data-id="password" autocomplete="off" class="input-text">
+            <input type="password" data-id="password" autocomplete="new-password" class="input-text" value="<?= $data["password"]; ?>">
         </div>
         <div class="form-group mb-2">
             <label for="nim">No WA</label>
-            <input type="number" id="wa" name="wa" data-id="wa" autocomplete="off" class="input-text">
+            <input type="number" data-id="wa" autocomplete="off" class="input-text" value="<?= $data["wa"]; ?>">
         </div>
 
     </form>
@@ -58,9 +58,10 @@
         $('input[type=file]').change(function(e) {
             e.preventDefault();
             var file_data = $("#foto").prop("files")[0];   
+            var foto_lama = $("#foto_profile").attr('src');
             var form_data = new FormData();
             form_data.append("foto", file_data);
-            form_data.append("foto_lama", "<?php $this->model('Profile_model')->getUserImage(); ?>");
+            form_data.append("foto_lama", foto_lama);
             $.ajax({
                 url: "profile/saveImage",
                 dataType: 'JSON',

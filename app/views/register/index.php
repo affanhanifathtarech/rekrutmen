@@ -1,11 +1,11 @@
 <h1>Mendaftar</h1>
 <form action="" method="post">
     <label for="nim">NIM : </label>
-    <input type="number" id="nim" name="nim" autocomplete="off">
+    <input type="number" id="nim" autocomplete="off">
     <label for="password">Password : </label>
-    <input type="password" id="password" name="password" autocomplete="off">
+    <input type="password" id="password" autocomplete="new-password" aria-autocomplete="list">
     <label for="wa">No Wa : </label>
-    <input type="number" id="wa" name="wa" autocomplete="off">
+    <input type="number" id="wa" autocomplete="off">
     <input type="submit" value="Daftar">
 </form>
 

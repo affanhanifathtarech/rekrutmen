@@ -11,7 +11,7 @@
 
 <?php mainjs(); ?>
 
-<script>
+<script> 
     $(function() {
         $('input[type=submit]').click(function(e) {
             e.preventDefault();

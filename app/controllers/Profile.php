@@ -3,6 +3,12 @@
 class Profile extends Controller{
     public function index()
     {
+        if(!isset($_SESSION['nim'])){
+            echo 'Sorry. Login dulu ya';
+            die;
+        }
+        
+        $data = $this->model('Profile_model')->getUser($_SESSION['nim'], 'nim', $selectColumn='*');
         $data['title'] = 'Profile';
         $this->view('profile/index', $data);
     }
