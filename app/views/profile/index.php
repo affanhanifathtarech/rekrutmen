@@ -32,7 +32,7 @@
     </form>
 </div>
 
-<?php mainjs(); ?>
+<?php require_once 'app/views/parts/mainjs.php'; ?>
 
 <script>
     $(function() {

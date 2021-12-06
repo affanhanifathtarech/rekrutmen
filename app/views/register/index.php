@@ -1,9 +1,9 @@
 <!-- Custom styles for this template -->
-<?php css('<link href="public/assets/pages/login-signup/style.css" rel="stylesheet">'); ?>
+<link href="public/assets/pages/login-signup/style.css" rel="stylesheet">
     
 <main class="form-signin">
   <form>
-    <img class="mb-5" src="public/images/logo.png" alt="logo" width="100">
+    <img class="mb-5" src="public/images/logo.webp" alt="logo" width="72">
 
     <div class="form-floating mb-2">
       <input type="number" class="form-control" id="nim" autocomplete="off" placeholder="06213031xxxx">
@@ -23,7 +23,7 @@
   </form>
 </main>
 
-<?php mainjs(); ?>
+<?php require_once 'app/views/parts/mainjs.php'; ?>
 
 <script>
     $(function() {
