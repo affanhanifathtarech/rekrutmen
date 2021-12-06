@@ -10,7 +10,7 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
         </tr>
         <tr>
             <td>Nama : </td>
-            <td><input type="text" id="nama" name="nama" value="<?= $data["nama"]; ?>"></td>
+            <td><input type="text" id="nama" class="input-text" name="nama" value="<?= $data["nama"]; ?>"></td>
         </tr>
         <tr>
             <td>Jenis Kelamin : </td>
@@ -132,7 +132,8 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
 <?php require_once 'app/views/parts/script.php'; ?>
 <script>
     $(function() {
-        $('input').change(function(e) {
+        $('.input-text').on('keyup', function(e) {
+            alert('ok');
             e.preventDefault();
             var column = $(this).attr('id');
             var value = $(this).val();

@@ -34,7 +34,7 @@ $data = $this->model("Profile_model")->getUser($_SESSION["id"]);
     </form>
 </div>
 
-<?php require_once 'app/views/parts/script.php'; ?>
+<?php mainjs(); ?>
 
 <script>
     $(function() {
