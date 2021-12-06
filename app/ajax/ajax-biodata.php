@@ -1,6 +1,6 @@
 <?php
 
-$data = $this->model('Biodata_model')->updateBiodataByColumn($_POST);
+$data = $this->model('Biodata_model')->updateBiodataByColumn($_POST['column'], $_POST['value'], 'nim' , $_POST['nim']);
 
 if($data > 0){
     $out = array(

@@ -6,13 +6,13 @@ class Biodata_model {
         $this->db = new Database();
     }
 
-    public function getBiodataUser($param='', $colName="id", $selectColumn = "*"){
+    public function getDataUser($param='', $colName="id", $selectColumn = "*"){
         $this->db->query("SELECT $selectColumn FROM " . $this->table . " WHERE $colName = :$colName");
         $this->db->bind($colName, $param);
         return $this->db->getData();
     }
 
-    public function updateBiodataByColumn($columnToUpdate, $val='', $updateByColumn='id' , $updatedColumnVal)
+    public function updateBiodataByColumn($columnToUpdate, $val='', $updateByColumn='id' , $updatedColumnVal='')
     {
         $query = "UPDATE " . $this->table . " SET `$columnToUpdate` = :val WHERE $updateByColumn = :updatedColumnVal";
         $this->db->query($query);
