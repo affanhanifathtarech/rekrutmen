@@ -131,6 +131,9 @@ $data = $this->model("Biodata_model")->getBiodataUser($_SESSION["nim"], "nim");
 </form>
 <?php require_once 'app/views/parts/script.php'; ?>
 <script>
+    document.getElementById('nama').addEventListener('change', function(){
+        alert('ok');
+    })
     $(function() {
         $('.input-text').on('keyup', function(e) {
             alert('ok');
