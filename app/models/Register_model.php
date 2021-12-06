@@ -12,11 +12,11 @@ class Register_model {
 
     public function registData($data)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES ('', :nim, '', :password, :wa)";
+        $query = "INSERT INTO " . $this->table . " VALUES ('', :nim, :password, :wa)";
         $this->db->query($query);
-        $this->db->bind('nim', $_POST['nim']);
-        $this->db->bind('password', $_POST['password']);
-        $this->db->bind('wa', $_POST['wa']);
+        $this->db->bind('nim', $data['nim']);
+        $this->db->bind('password', $data['password']);
+        $this->db->bind('wa', $data['wa']);
         $this->db->execute();
 
         return $this->db->rowCount();
