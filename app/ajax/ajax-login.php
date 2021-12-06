@@ -22,6 +22,7 @@ if($cek){
     $_SESSION["nim"] = $data["nim"];
     $_SESSION["id"] = $data["id"];
 
+
 } else {
    $out = array(
        "status" => 0,
