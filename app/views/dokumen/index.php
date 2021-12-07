@@ -6,6 +6,13 @@
 // die();
 ?>
 
+<div class="ro">
+    <div class="col-lg-6">
+        <h3>Upload File Rekomendasi</h3>
+        <form action=""></form>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-6">
         <h3>Upload File Rekomendasi HMJ</h3>
