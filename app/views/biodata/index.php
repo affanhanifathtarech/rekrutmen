@@ -10,13 +10,16 @@
     <input type="number" class="form-control" id="nim" value="<?= $data["nim"]; ?>" disabled>
 </div>
 <div class="form-group mb-2">
+    <label for="wa">No WA</label>
+    <input type="number" class="form-control" id="wa" value="<?= $data["wa"]; ?>">
+</div>
+<div class="form-group mb-2">
     <label for="jk">Jenis Kelamin</label>
     <select class="form-control" name='jk' id='jk'>
-        <option <?= ($data["angkatan"]=='Laki-Laki') ? 'selected' : ''?> value="Laki-Laki">Laki-Laki</option>
-        <option <?= ($data["angkatan"]=='Perempuan') ? 'selected' : ''?> value="Perempuan">Perempuan</option>
+        <option <?= ($data["jk"]=='1') ? 'selected' : ''?> value="1">Laki-Laki</option>
+        <option <?= ($data["jk"]=='0') ? 'selected' : ''?> value="0">Perempuan</option>
     </select>
 </div>
-
 <div class="form-group mb-2">
     <label for="jurusan">Jurusan</label>
     <select class="form-control" name="jurusan" id="jurusan">
@@ -66,6 +69,10 @@
     </select>
 </div>
 <div class="form-group mb-2">
+    <label for="alamat">Alamat</label>
+    <textarea class="form-control" id="alamat" data-id="textarea" rows="3"><?= $data["alamat"]; ?></textarea>
+</div>
+<div class="form-group mb-2">
     <label for="anak_ke">Anak ke</label>
     <input type="text" class="form-control" id="anak_ke" value="<?= $data["anak_ke"]; ?>">
 </div>
@@ -87,35 +94,90 @@
 </div>
 <div class="form-group mb-2">
     <label for="status_tinggal">Status Tinggal</label>
-    <input type="text" class="form-control" id="status_tinggal" value="<?= $data["status_tinggal"]; ?>">
+    <select class="form-control" name='status_tinggal' id='status_tinggal'>
+        <option <?= ($data["status_tinggal"]=='0') ? 'selected' : ''?> value="0">Merantau</option>
+        <option <?= ($data["status_tinggal"]=='1') ? 'selected' : ''?> value="1">Tidak Merantau</option>
+    </select>
 </div>
 <div class="form-group mb-2">
-    <label for="status_kelas">Status Kelas</label>
-    <input type="text" class="form-control" id="status_kelas" value="<?= $data["status_kelas"]; ?>">
+<label for="status_kelas">Status Kelas</label>
+    <select class="form-control" name='status_kelas' id='status_kelas'>
+        <option <?= ($data["status_kelas"]=='0') ? 'selected' : ''?> value="0">Pagi</option>
+        <option <?= ($data["status_kelas"]=='1') ? 'selected' : ''?> value="1">Siang</option>
+        <option <?= ($data["status_kelas"]=='2') ? 'selected' : ''?> value="2">Malam</option>
+    </select>
 </div>
 <div class="form-group mb-2">
-    <label for="liqo">Liqo</label>
-    <input type="text" class="form-control" id="liqo" value="<?= $data["liqo"]; ?>">
+    <label for="rohis">Pernah Rohis</label>
+    <select class="form-control" name='rohis' id='rohis'>
+        <option <?= ($data["rohis"]=='1') ? 'selected' : ''?> value="1">Pernah</option>
+        <option <?= ($data["rohis"]=='0') ? 'selected' : ''?> value="0">Tidak Pernah</option>
+    </select>
+</div>
+<div class="form-group mb-2">
+    <label for="liqo">Pernah Liqo</label>
+    <select class="form-control" name='liqo' id='liqo'>
+        <option <?= ($data["liqo"]=='1') ? 'selected' : ''?> value="1">Pernah</option>
+        <option <?= ($data["liqo"]=='0') ? 'selected' : ''?> value="0">Tidak Pernah</option>
+    </select>
 </div>
 <div class="form-group mb-2">
     <label for="organisasi">Organisasi</label>
-    <input type="text" class="form-control" id="organisasi" value="<?= $data["organisasi"]; ?>">
+    <textarea class="form-control" id="organisasi" data-id="textarea" rows="3"><?= $data["organisasi"]; ?></textarea>
 </div>
 <div class="form-group mb-2">
     <label for="hobi">Hobi</label>
-    <input type="text" class="form-control" id="hobi" value="<?= $data["hobi"]; ?>">
+    <textarea class="form-control" id="hobi" data-id="textarea" rows="3"><?= $data["hobi"]; ?></textarea>
 </div>
 <div class="form-group mb-2">
     <label for="email">Email</label>
-    <input type="text" class="form-control" id="email" value="<?= $data["email"]; ?>">
+    <input type="email" class="form-control" id="email" value="<?= $data["email"]; ?>">
 </div>
 <div class="form-group mb-2">
     <label for="status_pendidikan">Status Pendidikan</label>
-    <input type="text" class="form-control" id="status_pendidikan" value="<?= $data["status_pendidikan"]; ?>">
+    <select class="form-control" name='status_pendidikan' id='status_pendidikan'>
+        <option <?= ($data["status_pendidikan"]=='0') ? 'selected' : ''?> value="0">Lainnya</option>
+        <option <?= ($data["status_pendidikan"]=='1') ? 'selected' : ''?> value="1">Bidik Misi</option>
+        <option <?= ($data["status_pendidikan"]=='2') ? 'selected' : ''?> value="2">Beasiswa KIP</option>
+    </select>
 </div>
 <div class="form-group mb-2">
-    <label for="alasan_gabung">Alasan Gabung</label>
+    <label for="alasan_gabung">Alasan Bergabung</label>
     <textarea class="form-control" id="alasan_gabung" data-id="textarea" rows="3"><?= $data["alasan_gabung"]; ?></textarea>
+</div>
+<div class="form-group mb-2">
+    <label for="minat_bakat">Minat dan Bakat</label>
+    <textarea class="form-control" id="minat_bakat" data-id="textarea" rows="3"><?= $data["minat_bakat"]; ?></textarea>
+</div>
+<div class="form-group mb-2">
+    <label for="div1">Pilihan Divisi 1</label>
+    <select class="form-control" name="div1" id="div1">
+        <option <?= ($data["jurusan"]=='Pengembangan Sumber Daya Manusia') ? 'selected' : ''?> value="Pengembangan Sumber Daya Manusia">Pengembangan Sumber Daya Manusia</option>
+        <option <?= ($data["jurusan"]=='Learning Center') ? 'selected' : ''?> value="Learning Center">Learning Center</option>
+        <option <?= ($data["jurusan"]=='Minat Bakat Akademik') ? 'selected' : ''?> value="Minat Bakat Akademik">Minat Bakat Akademik</option>
+        <option <?= ($data["jurusan"]=='Syiar') ? 'selected' : ''?> value="Syiar">Syiar</option>
+        <option <?= ($data["jurusan"]=='Humas Multimedia dan Pers') ? 'selected' : ''?> value="Humas Multimedia dan Pers">Humas Multimedia dan Pers</option>
+        <option <?= ($data["jurusan"]=='Kemuslimahan') ? 'selected' : ''?> value="Kemuslimahan">Kemuslimahan</option>
+    </select>
+</div>
+<div class="form-group mb-2">
+    <label for="alasan_div1">Alasan Memilih Divisi 1</label>
+    <textarea class="form-control" id="alasan_div1" data-id="textarea" rows="3"><?= $data["alasan_div1"]; ?></textarea>
+</div>
+<div class="form-group mb-2">
+    <label for="div2">Pilihan Divisi 1</label>
+    <select class="form-control" name="div2" id="div2">
+        <option <?= ($data["jurusan"]=='Pengembangan Sumber Daya Manusia') ? 'selected' : ''?> value="Pengembangan Sumber Daya Manusia">Pengembangan Sumber Daya Manusia</option>
+        <option <?= ($data["jurusan"]=='Learning Center') ? 'selected' : ''?> value="Learning Center">Learning Center</option>
+        <option <?= ($data["jurusan"]=='Minat Bakat Akademik') ? 'selected' : ''?> value="Minat Bakat Akademik">Minat Bakat Akademik</option>
+        <option <?= ($data["jurusan"]=='Syiar') ? 'selected' : ''?> value="Syiar">Syiar</option>
+        <option <?= ($data["jurusan"]=='Humas Multimedia dan Pers') ? 'selected' : ''?> value="Humas Multimedia dan Pers">Humas Multimedia dan Pers</option>
+        <option <?= ($data["jurusan"]=='Kemuslimahan') ? 'selected' : ''?> value="Kemuslimahan">Kemuslimahan</option>
+    </select>
+</div>
+<div class="form-group mb-2">
+    <label for="alasan_div2">Alasan Memilih Divisi 1</label>
+    <textarea class="form-control" id="alasan_div2" data-id="textarea" rows="3"><?= $data["alasan_div2"]; ?></textarea>
 </div>
 </form>
 </div>
@@ -212,13 +274,14 @@
                 },
                 dataType: 'JSON',
                 success: function(data){
-                    console.log(data);
                     if (data.status==1){
+                        elem.removeClass('is-valid').next().remove();
                         elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil disimpan!</div>');
-                        setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000);
+                        setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 5000);
                     } else if(data.status==0){
+                        elem.removeClass('is-invalid').next().remove();
                         elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal disimpan!</div>');
-                        setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 3000); 
+                        setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 5000); 
                     }
                 }
             })

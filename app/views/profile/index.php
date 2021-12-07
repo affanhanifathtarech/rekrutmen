@@ -28,12 +28,6 @@
             </span>
             <input type="password" class="form-control" id="password" autocomplete="new-password" value="<?= $data["password"]; ?>" aria-describedby="basic-addon1">
         </div>
-
-        <div class="form-group mb-2">
-            <label for="wa">No WA</label>
-            <input type="number" class="form-control" id="wa" autocomplete="off" class="input-text" value="<?= $data["wa"]; ?>">
-        </div>
-
     </form>
 </div>
 
@@ -65,11 +59,13 @@
                 dataType: 'JSON',
                 success: function(data){
                     if (data.status==1){
+                        elem.removeClass('is-valid').next().remove();
                         elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil disimpan!</div>');
-                        setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000);
+                        setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 5000);
                     } else if(data.status==0){
+                        elem.removeClass('is-invalid').next().remove();
                         elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal disimpan!</div>');
-                        setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 3000); 
+                        setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 5000); 
                     }
                 }
             })
