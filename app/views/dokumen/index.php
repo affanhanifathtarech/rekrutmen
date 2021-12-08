@@ -1,10 +1,7 @@
 <?php
-// $file_rekomendasi = 
-// $file_rekomendasi = explode('/', $this->model('Dokumen_model')->getFileRekomendasi()); 
-// $file_rekomendasi = end($file_rekomendasi);
-// var_dump($file_rekomendasi);
-// die();
+
 $data = $this->model('Biodata_model')->getDataUser($_SESSION["nim"], "nim", "nama");
+$_SESSION["nama"] = $data["nama"];
 // var_dump($data);
 // die();
 // if($data["nama"] === ""){
@@ -25,19 +22,25 @@ $data = $this->model('Biodata_model')->getDataUser($_SESSION["nim"], "nim", "nam
     <div class="col-lg-6">
         <h3>Upload File Rekomendasi HMJ</h3>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="file" name="file_rekomendasi" id="file_rekomendasi" disabled>
-            <span class="message">  isi nama dulu di biodata</span>
+            <input type="file" name="file_rekomendasi" id="file_rekomendasi">
+            
     </div>
     <div class="col-lg-6">
-        <a href="<?= $this->model('Dokumen_model')->getFileRekomendasi(); ?>"><?= $_SESSION["nim"] . '.pdf'; ?></a>
+        <?php
+        $file = $this->model("Dokumen_model")->getFileRekomendasi();
+        $file = explode('/', $file);
+        $file = end($file);
+        
+        ?>
+        <a href="<?= $this->model('Dokumen_model')->getFileRekomendasi(); ?>"><?= $file; ?></a>
     </div>
 </div>
 <br><br><br>
 <div class="row">
     <div class="col-lg-6">
         <h3>Upload File Sertifikat Pendukung ( Optional )</h3>
-            <input type="file" name="file_sertifikat" id="file_sertifikat" multiple disabled>
-            <span class="message">isi nama dulu di biodata</span>
+            <input type="file" name="file_sertifikat" id="file_sertifikat" multiple=multiple>
+            
         </form>
     </div>
 
@@ -54,21 +57,24 @@ $data = $this->model('Biodata_model')->getDataUser($_SESSION["nim"], "nim", "nam
 
 <script>
     $(function(){
-        <?php if($data["nama"] !== "") : ?>
-            $('#file_rekomendasi').removeAttr('disabled');
-            $('#file_sertifikat').removeAttr('disabled');
+        <?php if($data["nama"] == "") : ?>
+            $('#file_rekomendasi').addClass('is-invalid').after('<div class="invalid-feedback">Nama Di Biodata Belum ada heheh</div>');
+            $('#file_sertifikat').addClass('is-invalid').after('<div class="invalid-feedback">Nama Di Biodata Belum ada heheh</div>');;
+            $('#file_sertifikat').attr('disabled', true);
+            $('#file_rekomendasi').attr('disabled', true);
             // $('span .message').addClass('d-none');
-            $('.message').html('');
+            // $('.message').html('');
         <?php endif; ?>
         $('#file_rekomendasi').change(function(e) {
             e.preventDefault();
             var file_data = $("#file_rekomendasi").prop("files")[0];   
+            var elem = $(this);
             // var foto_lama = $("#file_rekomendasi").attr('src');
             var form_data = new FormData();
             form_data.append("file_rekomendasi", file_data);
             // form_data.append("file_rekomendasi_lamo", foto_lama);
             $.ajax({
-                url: "dokumen/saveDokumen",
+                url: "dokumen/saveDokumenRekomendasi",
                 dataType: 'JSON',
                 cache: false,
                 contentType: false,
@@ -76,99 +82,49 @@ $data = $this->model('Biodata_model')->getDataUser($_SESSION["nim"], "nim", "nam
                 data: form_data,                      
                 type: 'post',
                 success: function(data){
-                    // if (data.status==1){
-                    //     $('#foto_profile').attr('src', data.data.url);
-                    // } else if (data.status==0){
-                    //     alert(data.data.msg);
-                    // }
                     console.log(data);
+                    if (data.status==1){
+                        elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil diupload!</div>');
+                        setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000);
+                    } else if(data.status==0){
+                        elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal diupload!</div>');
+                        setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 3000); 
+                    }
                 }
              });
         });
         $('#file_sertifikat').change(function(e) {
             e.preventDefault();
-            var fd = new FormData();  
+            var myfiles = document.getElementById("file_sertifikat");
+            var files = myfiles.files;
+            var data = new FormData();
+            var elem = $(this);
 
-            for (var i = 0, len = document.getElementById('file_sertifikat').files.length; i < len; i++) {
-                fd.append("file_sertifikat", document.getElementById('file_sertifikat').files[i]); 
+                    for (i = 0; i < files.length; i++) {
+                        data.append('file' + i, files[i]);
+                    }
+
                     $.ajax({
-                url: 'dokumen/saveDokumenSertifikat',
-                data: fd,
-                processData: false,
-                contentType: false,
-                type: 'POST',      
-                success: function(data){
-                    console.log(data);
-                }      
-                })         
-            }
-
-            
-            // var file_data = $("#file_sertifikat").prop("files"); 
-            // var form_data = new FormData();
-            // for(var i = 0; i < file_data.length; i++){
-            //     form_data.append("file_sertifikat[]", file_data);
-            // }  
-            // // var foto_lama = $("#file_sertifikat").attr('src');
-           
-           
-            // // form_data.append("file_sertifikat_lamo", foto_lama);
-            // $.ajax({
-            //     url: "dokumen/saveDokumenSertifikat",
-            //     dataType: 'JSON',
-            //     cache: false,
-            //     contentType: false,
-            //     processData: false,
-            //     data: form_data,                      
-            //     type: 'post',
-            //     success: function(data){
-            //         // if (data.status==1){
-            //         //     $('#foto_profile').attr('src', data.data.url);
-            //         // } else if (data.status==0){
-            //         //     alert(data.data.msg);
-            //         // }
-            //         console.log(data);
-            //     }
-            //  });
-            
+                        url: 'dokumen/saveDokumenSertifikat', 
+                        type: 'POST',
+                        contentType: false,
+                        data: data,
+                        dataType: 'JSON',
+                        processData: false,
+                        cache: false,
+                        success : function(data){
+                            console.log(data);
+                            if (data.status==1){
+                                elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil diupload!</div>');
+                                setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000);
+                            } else if(data.status==0){
+                                elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal diupload!</div>');
+                                setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 3000); 
+                            }
+                        }
+                    })
+                
         });
-    //     $('#file_sertifikat').change(function() {
-    // var filedata = $('#file_sertifikat'),
-    //         formdata = false;
-    // if (window.FormData) {
-    //     formdata = new FormData();
-    // }
-    // var i = 0, len = filedata.files.length;
 
-    // for (i; i < len; i++) {
-    //     file = filedata.files[i];
-
-    //     if (window.FileReader) {
-    //         reader = new FileReader();
-    //         reader.onloadend = function(e) {
-    //             showUploadedItem(e.target.result, file.fileName);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     }
-    //     if (formdata) {
-    //         formdata.append("file_sertifikat", file);
-    //     }
-    // }
-    // if (formdata) {
-    //     $.ajax({
-    //         url: "dokumen/saveDokumenSertifikat",
-    //         type: "POST",
-    //         data: formdata,
-    //         processData: false,
-    //         contentType: false,
-    //         success: function(res) {
-    //             console.log(res);
-    //         },       
-    //         error: function(res) {
-
-    //          }       
-    //          });
-    //         }
-    //     });
     });
 </script>

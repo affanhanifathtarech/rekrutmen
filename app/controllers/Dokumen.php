@@ -5,8 +5,12 @@ class Dokumen extends Controller {
         $this->view('dokumen/index', $data);
     }
 
-    public function saveDokumen(){
-        $this->ajax('ajax-dokumen');
+    public function saveDokumenRekomendasi(){
+        $this->ajax('ajax-file-rekomendasi');
+    }
+
+    public function saveDokumenSertifikat(){
+        $this->ajax('ajax-file-sertifikat');
     }
 
   
