@@ -4,6 +4,14 @@
 // $file_rekomendasi = end($file_rekomendasi);
 // var_dump($file_rekomendasi);
 // die();
+$data = $this->model('Biodata_model')->getDataUser($_SESSION["nim"], "nim", "nama");
+// var_dump($data);
+// die();
+// if($data["nama"] === ""){
+//     echo "benar";
+//     die();
+// }
+
 ?>
 
 <div class="ro">
@@ -17,7 +25,8 @@
     <div class="col-lg-6">
         <h3>Upload File Rekomendasi HMJ</h3>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="file" name="file_rekomendasi" id="file_rekomendasi">
+            <input type="file" name="file_rekomendasi" id="file_rekomendasi" disabled>
+            <span class="message">  isi nama dulu di biodata</span>
     </div>
     <div class="col-lg-6">
         <a href="<?= $this->model('Dokumen_model')->getFileRekomendasi(); ?>"><?= $_SESSION["nim"] . '.pdf'; ?></a>
@@ -27,7 +36,8 @@
 <div class="row">
     <div class="col-lg-6">
         <h3>Upload File Sertifikat Pendukung ( Optional )</h3>
-            <input type="file" name="file_sertifikat" id="file_sertifikat" multiple>
+            <input type="file" name="file_sertifikat" id="file_sertifikat" multiple disabled>
+            <span class="message">isi nama dulu di biodata</span>
         </form>
     </div>
 
@@ -44,6 +54,12 @@
 
 <script>
     $(function(){
+        <?php if($data["nama"] !== "") : ?>
+            $('#file_rekomendasi').removeAttr('disabled');
+            $('#file_sertifikat').removeAttr('disabled');
+            // $('span .message').addClass('d-none');
+            $('.message').html('');
+        <?php endif; ?>
         $('#file_rekomendasi').change(function(e) {
             e.preventDefault();
             var file_data = $("#file_rekomendasi").prop("files")[0];   
