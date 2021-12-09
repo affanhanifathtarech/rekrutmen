@@ -1,18 +1,22 @@
 <?php
 class Dokumen extends Controller {
-    public function index()
-    {
+    public function index(){
         if(!isset($_SESSION['nim'])){
             header("location: login");
             exit();
         }
-
-        $data["title"] = "Dokumen";
-        $this->view('dokumen/index', $data);
+        
+        $data['url'] = 'dokumen';
+        $data['title'] = 'Dokumen - LDK Karisma';
+        $this->viewDashboard('dokumen/index', $data);
     }
 
-    public function saveDokumen(){
-        $this->ajax('ajax-dokumen');
+    public function saveDokumenRekomendasi(){
+        $this->ajax('ajax-file-rekomendasi');
+    }
+
+    public function saveDokumenSertifikat(){
+        $this->ajax('ajax-file-sertifikat');
     }
 
   
