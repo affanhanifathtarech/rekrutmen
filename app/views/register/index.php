@@ -42,7 +42,7 @@
                 },
                 dataType: 'JSON',
                 success: function(data){
-                    alert(data.data.msg);
+                    window.location.href = 'login';
                 }
             })
         });

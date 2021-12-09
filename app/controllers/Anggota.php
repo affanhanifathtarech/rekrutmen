@@ -1,11 +1,10 @@
 <?php 
-
-class Anggota extends Controller{
+class Anggota extends Controller {
     public function index()
     {
         if(!isset($_SESSION['nim'])){
-            echo 'Sorry. Login dulu ya';
-            die;
+            header("location: login");
+            exit();
         }
         
         $data['title'] = 'Data Anggota - LDK Karisma';

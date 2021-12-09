@@ -1,17 +1,17 @@
 <?php 
-
 class Profile extends Controller{
     public function index()
     {
         if(!isset($_SESSION['nim'])){
-            echo 'Sorry. Login dulu ya';
-            die;
+            header("location: login");
+            exit();
         }
         
         $data = $this->model('Profile_model')->getUser($_SESSION['nim'], 'nim');
         $data['nama'] = $this->model('Biodata_model')->getDataUser($_SESSION['nim'], 'nim', 'nama')['nama'];
         $data['title'] = 'Profil - LDK Karisma';
-        $this->view('profile/index', $data);
+        $data['url'] = 'profile';
+        $this->viewDashboard('profile/index', $data);
     }
 
     public function save()
