@@ -81,8 +81,11 @@ if(!empty($glob)){
             e.preventDefault();
             var elem = $(this);
             var file_data = $("#file_rekomendasi").prop("files")[0];   
+            var elem = $(this);
+            // var foto_lama = $("#file_rekomendasi").attr('src');
             var form_data = new FormData();
             form_data.append("file_rekomendasi", file_data);
+            // form_data.append("file_rekomendasi_lamo", foto_lama);
             $.ajax({
                 url: "dokumen/saveDokumenRekomendasi",
                 dataType: 'JSON',
