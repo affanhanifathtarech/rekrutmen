@@ -3,18 +3,29 @@ $glob = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
 $display = (empty($glob)) ? 'style="display:none;"' : '';
 $link = (empty($glob)) ? '' : $glob[0] ;
 
-$files = [];
-$sertifikat = glob('public/dokumen/sertifikat/' . $_SESSION['nim'] . "/*");
-if(!empty($glob)){
-    foreach ($sertifikat as $key => $value) {
-        $file = explode('public/dokumen/sertifikat/'. $_SESSION["nim"] . '/' .$_SESSION["nim"] . ' - ', $value)[1];
-        $files[$key]['timestamp'] = explode(' - ', $file)[0];
-        $files[$key]['filename'] = explode(' - ', $file)[1];
-        $files[$key]['dir'] = $value;
-    }
-}
 ?>
-    <!-- Main content -->
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<style>
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+</style>
+<!-- Main content -->
     <div class="main-content content m-auto">
       <div class="container-fluid">
         <div class="row">
@@ -22,18 +33,18 @@ if(!empty($glob)){
 
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-5">
+                    <div class="form-group">
                         <label for="file_rekomendasi" class="form-label">Upload File Rekomendasi HMJ</label>
                         <input class="form-control" type="file" id="file_rekomendasi">
-                        <div class="d-grid gap-2 d-md-block mt-2">
-                            <a href="<?= $link;?>" target='_BLANK' class="btn btn-info rekomendasi" <?= $display ?>>Lihat Dokumen</a>
-                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <a href="<?= $link;?>" target='_BLANK' class="btn btn-info rekomendasi" <?= $display ?>>Lihat Dokumen</a>
                     </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="file_serfikat" class="form-label">Upload File Sertifikat Pendukung ( Optional )</label>
                         <input class="form-control" type="file" name="file_sertifikat" id="file_sertifikat" multiple>
                     </div>
@@ -42,31 +53,21 @@ if(!empty($glob)){
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="table-responsive" style="height: 300px;">
-                    <table class="table table-head-fixed text-nowrap">
+                    <div class="table-responsive">
+                    <table id="tabel-sertifikat" class="display nowrap" style="width:100%">
                         <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama File</th>
                             <th>Waktu Upload</th>
-                            <th></th>
+                            <th>Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php if(!empty($glob)) foreach ($files as $key => $value) :?>
-                        <tr>
-                            <td><?= $key+1?></td>
-                            <td><?= $value['filename']?></td>
-                            <td><?= date('m/d/Y H:i:s', $value['timestamp']);?></td>
-                            <td><a href="<?= $value['dir']?>" target="_BLANK"><span class="badge bg-info">buka</span></a></td>
-                        </tr>
-                        <?php endforeach; ?>
                         </tbody>
                     </table>
-                    </div>
-                    <!-- /.card-body -->
-            
-            </div>
+                    </div>            
+                </div>  
             </div>
           </div>
         </div>
@@ -74,18 +75,48 @@ if(!empty($glob)){
     </div>
 
 <?php require_once 'app/views/parts/mainjs.php'; ?>
+<?php require_once 'app/views/parts/mainjsDashboard.php'; ?>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <script>
     $(function(){
+        $('#tabel-sertifikat').DataTable( {
+            "ajax"  : 'dokumen/getGlob',
+            "paging":  false,
+            "info":  false,
+            "searching":  false,
+            "ordering":  false,
+            "scrollY": 200,
+            "scrollX": true,
+            "columns": [
+            { "data": "id" },
+            { "data": "filename" },
+            { "data": "timestamp" },
+            { "data": "dir" }
+            ],
+            "columnDefs": [ 
+                {
+                "targets": 3,
+                "render": function ( data, type, row, meta ) {
+                    return '<a href="'+ row['dir'] +'" ><span class="btn btn-xs btn-info">buka</span></a><span class="btn btn-xs btn-danger ml-2" data-toggle="modal" data-target="#modal-hapus" data-hapus="">hapus</span>';
+                    }
+                },
+                {
+                "targets": 2,
+                "render": function ( data, type, row, meta ) {
+                    return moment.unix(row['timestamp']).format('DD-MMM-YY HH:mm');
+                    }
+                }
+            ]
+        } );
+
         $('#file_rekomendasi').change(function(e) {
             e.preventDefault();
             var elem = $(this);
             var file_data = $("#file_rekomendasi").prop("files")[0];   
-            var elem = $(this);
-            // var foto_lama = $("#file_rekomendasi").attr('src');
             var form_data = new FormData();
             form_data.append("file_rekomendasi", file_data);
-            // form_data.append("file_rekomendasi_lamo", foto_lama);
             $.ajax({
                 url: "dokumen/saveDokumenRekomendasi",
                 dataType: 'JSON',
@@ -113,31 +144,31 @@ if(!empty($glob)){
             var files = elem.get(0).files;
             var data = new FormData();
 
-                    for (i = 0; i < files.length; i++) {
-                        data.append('file' + i, files[i]);
-                    }
+            for (i = 0; i < files.length; i++) {
+                data.append('file' + i, files[i]);
+            }
 
-                    $.ajax({
-                        url: 'dokumen/saveDokumenSertifikat', 
-                        type: 'POST',
-                        contentType: false,
-                        data: data,
-                        dataType: 'JSON',
-                        processData: false,
-                        cache: false,
-                        success : function(data){
-                            data.data.forEach(function(item, index) {
-                                if (item.status==1){
-                                    elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil mengunggah ' + item.filename + '</div>');
-                                    setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000); 
-                                } else if(item.status==0){
-                                    elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal mengunggah ' + item.filename + '</div>');
-                                    setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 3000); 
-                                }
-                            });
-
+            $.ajax({
+                url: 'dokumen/saveDokumenSertifikat', 
+                type: 'POST',
+                contentType: false,
+                data: data,
+                dataType: 'JSON',
+                processData: false,
+                cache: false,
+                success : function(data){
+                    data.data.forEach(function(item, index) {
+                        if (item.status==1){
+                            elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil mengunggah ' + item.filename + '</div>');
+                            setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000); 
+                        } else if(item.status==0){
+                            elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal mengunggah ' + item.filename + '</div>');
+                            setTimeout(function(){ elem.removeClass('is-invalid').next().remove(); }, 3000); 
                         }
-                    })
+                    });
+
+                }
+            })
                 
         });
 

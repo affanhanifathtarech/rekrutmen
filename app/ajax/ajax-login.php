@@ -1,6 +1,7 @@
 <?php 
 $data = $this->model('Login_model')->getUser(@$_POST['nim'], 'nim');
 $null = [];
+$err = null;
 
 if(!$data){
     $status = 0;

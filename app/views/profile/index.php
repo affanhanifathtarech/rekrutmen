@@ -6,7 +6,7 @@
 
             <div class="card">
                 <!-- /.card-header -->
-                <div class="row card-body">
+                <div class="card-body">
                     
                     <div class="form-group mb-2">
                         <label for="nama">Nama</label>

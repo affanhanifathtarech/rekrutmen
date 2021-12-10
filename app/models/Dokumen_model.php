@@ -6,8 +6,4 @@ class Dokumen_model {
         ($nim=='') ? $nim = $_SESSION['nim'] : '';
         return BASEURL . 'public/dokumen/rekomendasi/' . $_SESSION["nama"] . ' - ' . $nim . '.pdf';
     }
-    // public function getFileSertifikat($nim = '')
-    // {
-
-    // }
 }
