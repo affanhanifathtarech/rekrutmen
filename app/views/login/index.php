@@ -1,4 +1,5 @@
 <!-- Custom styles for this template -->
+
 <link href="public/assets/pages/login-signup/style.css" rel="stylesheet">
 
 <div class="container">
@@ -60,11 +61,11 @@
           </div>
           <div class="checkbox mt-3 mb-3">
             <label>
-              <input type="checkbox" value="remember-me"> Remember me
+              <input type="checkbox" id="remember_me" name="remember"> Remember me
             </label>
           </div>
           <div class="form-group">
-            <input class="w-100 btn btn-lg btn-primary mt-2" type="submit" value="Masuk">
+            <button class="w-100 btn btn-lg btn-primary mt-2" type="submit" id="form-login">Masuk</button>
           </div>
           <div class="form-group">
             <input class="w-100 btn btn-lg btn-success my-2" value="Mendaftar" data-bs-toggle="modal" data-bs-target="#register">
@@ -116,16 +117,24 @@
 
 <script> 
     $(function() {
+      
         $('#form-login').submit(function(e) {
             e.preventDefault();
             var nim = $('#nim-login').val();
             var password = $('#password-login').val();
+            var remember_me = false;
+           
+            if ($('#remember_me').is(':checked')) {
+              remember_me = true;
+            }
+            // var remember_me = $('#remember_me').val();
             $.ajax({
                 url: 'login/login',
                 method: 'POST',
                 data: {
                     nim : nim,
-                    password : password
+                    password : password,
+                    remember : remember_me
                 },
                 dataType: 'JSON',
                 success: function(data){

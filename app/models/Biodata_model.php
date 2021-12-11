@@ -7,8 +7,9 @@ class Biodata_model {
     }
 
     public function getDataUser($param='', $colName="id", $selectColumn = "*"){
-        $this->db->query("SELECT $selectColumn FROM " . $this->table . " WHERE $colName = :$colName");
-        $this->db->bind($colName, $param);
+        // $this->db->query("SELECT $selectColumn FROM " . $this->table . " WHERE $colName = :$colName");
+        // $this->db->bind($colName, $param);
+        $this->db->query("SELECT * FROM biodata INNER JOIN user ON biodata.nim = user.nim");
         return $this->db->getData();
     }
 

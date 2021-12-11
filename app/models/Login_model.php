@@ -16,5 +16,9 @@ class Login_model {
         $this->db->bind($colName, $param);
         return $this->db->getData();
     }
+
+    public function set_cookie($name, $value, $time = 360){
+        setcookie($name, $value, time()+$time);
+    }
     
 }
