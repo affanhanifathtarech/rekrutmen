@@ -6,7 +6,6 @@ $glob2 = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
 $display['rekomendasi'] = (empty($glob2)) ? 'style="display:none;"' : '';
 $display['tampilan_rekomendasi'] = (empty($glob2)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
 $link = (empty($glob2)) ? '' : $glob2[0] ;
-
 ?>
 
 <!DOCTYPE html> 
@@ -16,15 +15,15 @@ $link = (empty($glob2)) ? '' : $glob2[0] ;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <meta name="description" content="<?= $caption;?>"> -->
-    <meta property="og:image" itemprop="image" content="public/images/logo.png"> 
+    <meta property="og:image" itemprop="image" content="<?= BASEURL;?>public/images/logo.png"> 
     <meta name="author" content="Karisma Polsri">
     <meta name="generator" content="Karisma Polsri">   
-    <link rel="icon" type="image/png" href="public/images/logo.png">
+    <link rel="icon" type="image/png" href="<?= BASEURL;?>public/images/logo.png">
     <title><?= $data['title'] ?></title>
-    <link href="public/assets/bootstrap/bootstrap@5.1.3.min.css" rel="stylesheet">
+    <link href="<?= BASEURL;?>public/assets/bootstrap/bootstrap@5.1.3.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="public/assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="public/assets/pages/dashboard/adminlte2.css">
+    <link rel="stylesheet" href="<?= BASEURL;?>public/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="<?= BASEURL;?>public/assets/pages/dashboard/adminlte2.css">
     <style>
       .scrolling-wrapper {
         overflow-x: auto;
@@ -251,22 +250,22 @@ $link = (empty($glob2)) ? '' : $glob2[0] ;
       <div class="container-fluid">
         <div class="row bg-white">
 
-          <div class="widget-user-header text-white" style="padding-top:200px; background: #fff url(public/images/bg-user.jpg) center center/cover no-repeat;">
+          <div class="widget-user-header text-white" style="padding-top:200px; background: #fff url(<?= BASEURL;?>public/images/bg-user.jpg) center center/cover no-repeat;">
           </div>
 
           <div class="border-bottom border-2 cover mx-auto">
             <div class="row cover-content">
               <div class="widget-user-profile col-lg-4 d-flex align-items-start justify-content-center">
                 <div class="user-profile img-circle overflow-hidden d-flex align-items-start justify-content-center">
-                  <img src="<?php $this->model('Profile_model')->getUserImage()?>" alt="User Avatar" data-bs-toggle="modal" data-bs-target="#change-profile">
+                  <img src="<?php ($data['url']=='detail') ? $this->model('Profile_model')->getUserImage($data['nim']) : $this->model('Profile_model')->getUserImage();?>" alt="User Avatar" data-bs-toggle="modal" data-bs-target="#change-profile">
                   <button type="button" class="btn btn-light btn-sm btn-change-profile" data-bs-toggle="modal" data-bs-target="#change-profile">
                     Perbarui Foto
                   </button>
                 </div>
               </div>
               <div class="col-lg-8 widget-user-info">
-                <h3 class="h1 fw-bold pt-4"><?= $_SESSION['nama']; ?></h3>
-                <h4 class="h3 fw-italic"><?= ($_SESSION['nama']=='') ? '' : $_SESSION['nim']; ?></h3>
+                <h3 class="h1 fw-bold pt-4"><?= ($data['url']=='detail') ? $data['nama'] : $_SESSION['nama']; ?></h3>
+                <h4 class="h3 fw-italic"><?= ($data['url']=='detail') ? $data['nim'] : (($_SESSION['nama']=='') ? '' : $_SESSION['nim']); ?></h3>
               </div>
             </div>
           </div>
@@ -281,7 +280,7 @@ $link = (empty($glob2)) ? '' : $glob2[0] ;
                 <div class="modal-body d-flex align-items-center justify-content-center">
                     <div class="form-group">
                       <div class="d-flex align-items-center justify-content-center">
-                        <img height="300px" src="<?php $this->model('Profile_model')->getUserImage(); ?>" alt="foto-profil" id="foto_profile">
+                        <img height="300px" src="<?php ($data['url']=='detail') ? $this->model('Profile_model')->getUserImage($data['nim']) : $this->model('Profile_model')->getUserImage();?>" alt="foto-profil" id="foto_profile">
                       </div>
                       <label for="foto" class="btn btn-outline-primary btn-block mt-4">Unggah Foto</label>
                       <input type="file" id="foto" class="form-control mt-4" name="foto" accept="image/*" style="display:none;">
@@ -305,6 +304,9 @@ $link = (empty($glob2)) ? '' : $glob2[0] ;
               </li>
               <li class="nav-item">
                 <a class="nav-link <?= ($data['url']=='dokumen') ? 'active' : '';?>" href="dokumen">Dokumen</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <?= ($data['url']=='anggota') ? 'active' : '';?>" href="anggota">Anggota</a>
               </li>
             </ul>
             </div>

@@ -14,7 +14,7 @@
         });
 
         $.ajax({
-            url: 'instagram/getJSON',
+            url: '<?= BASEURL;?>instagram/getJSON',
             method: 'GET'
         })
 
@@ -24,10 +24,16 @@
             var file_data = $("#foto").prop("files")[0];   
             var foto_lama = $("#foto_profile").attr('src');
             var form_data = new FormData();
+            if ('<?= $data['url'];?>' == 'detail' ) {
+                var nim = '<?= $data['nim'];?>';
+            } else {
+                var nim = '<?= $_SESSION['nim'];?>';
+            }
             form_data.append("foto", file_data);
             form_data.append("foto_lama", foto_lama);
+            form_data.append("nim", nim);
             $.ajax({
-                url: "profile/saveImage",
+                url: "<?= BASEURL;?>profile/saveImage",
                 dataType: 'JSON',
                 cache: false,
                 contentType: false,

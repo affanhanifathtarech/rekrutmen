@@ -7,10 +7,9 @@ $file = $_FILES["foto"];
 
 $eks = explode('.', $file["name"]);
 $eks = strtolower(end($eks));
-$url = 'public/images/user/'. $_SESSION['nim'] . ".$eks";
+$url = 'public/images/user/'. $_POST['nim'] . ".$eks";
 
 $upload = move_uploaded_file($file["tmp_name"], $url );
-
 if(!$is_default){
     unlink('public/images/user/'. $foto_lama );
 }

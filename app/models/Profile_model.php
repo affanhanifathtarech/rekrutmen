@@ -50,4 +50,15 @@ class Profile_model {
 
         return $this->db->rowCount();
     }
+
+    public function updateDataByNIM($val='', $columnToUpdate='', $nim='')
+    {
+        $query = "UPDATE " . $this->table . " SET `$columnToUpdate` = :val WHERE nim = :nim";
+        $this->db->query($query);
+        $this->db->bind('val', $val);
+        $this->db->bind('nim', $nim);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
