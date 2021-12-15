@@ -10,18 +10,18 @@
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item px-1">
                       <span class="badge bg-cyan mr-2">1</span>
-                      <a href="biodata">Lengkapi Biodata</a>   
-                      <span class="badge badge-danger ml-2">belum</span>
+                      <a href="biodata" class="nav-link" style="display:inline; padding:unset;">Lengkapi Biodata</a>   
+                      <i class="fas fa-times-circle text-danger"></i>
                     </li>
                     <li class="list-group-item px-1">
                       <span class="badge bg-cyan mr-2">2</span>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#change-profile">Upload Pas Foto</a>
-                      <span class="badge badge-success ml-2">sudah</span>
+                      <a href="#" id="display_profil" class="nav-link" style="display:inline; padding:unset;" data-bs-toggle="modal" data-bs-target="#change-profile">Upload Pas Foto</a>
+                      <?= $display['foto_profil'] ?>
                     </li>
                     <li class="list-group-item px-1">
                       <span class="badge bg-cyan mr-2">3</span>
-                      <a href="dokumen">Upload Lembar Rekomendasi HMJ</a>
-                      <span class="badge badge-danger ml-2">belum</span>
+                      <a class="nav-link" href="dokumen" style="display:inline; padding:unset;">Upload Lembar Rekomendasi HMJ</a>
+                      <?= $display['tampilan_rekomendasi'] ?>
                     </li>
                   </ul>
                 </div>  

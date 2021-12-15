@@ -1,7 +1,7 @@
 <?php
 $foto_lama = explode('/', $_POST['foto_lama']);
 $foto_lama = end($foto_lama);
-($foto_lama=='logo.webp') ? $is_default=true : $is_default=false;
+($foto_lama=='user.png') ? $is_default=true : $is_default=false;
 
 $file = $_FILES["foto"];
 

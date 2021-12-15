@@ -1,5 +1,6 @@
 <?php 
 $data = $this->model('Login_model')->getUser(@$_POST['nim'], 'nim');
+$data2 = $this->model('Biodata_model')->getDataUser(@$_POST['nim'], 'nim', 'nama');
 $null = [];
 $err = null;
 
@@ -17,6 +18,7 @@ if(!$data){
         $msg = "Berhasil Login";
         $_SESSION["nim"] = $data["nim"];
         $_SESSION["id"] = $data["id"];
+        $_SESSION["nama"] = $data2["nama"];
     }
 }
 

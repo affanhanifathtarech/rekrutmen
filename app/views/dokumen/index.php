@@ -1,10 +1,3 @@
-<?php
-$glob = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
-$display = (empty($glob)) ? 'style="display:none;"' : '';
-$link = (empty($glob)) ? '' : $glob[0] ;
-
-?>
-
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <style>
 ::-webkit-scrollbar {
@@ -34,11 +27,11 @@ $link = (empty($glob)) ? '' : $glob[0] ;
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="file_rekomendasi" class="form-label">Upload File Rekomendasi HMJ</label>
+                        <label for="file_rekomendasi" class="form-label">Upload File Rekomendasi HMJ <i class="berhasil fas fa-check-circle text-success" <?= $display['rekomendasi']; ?>></i></label>
                         <input class="form-control" type="file" id="file_rekomendasi">
                     </div>
                     <div class="mt-2">
-                        <a href="<?= $link;?>" target='_BLANK' class="btn btn-info rekomendasi" <?= $display ?>>Lihat Dokumen</a>
+                        <a href="<?= $link;?>" target='_BLANK' class="btn btn-info rekomendasi" <?= $display['rekomendasi'] ?>>Lihat Dokumen</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +74,7 @@ $link = (empty($glob)) ? '' : $glob[0] ;
 
 <script>
     $(function(){
-        $('#tabel-sertifikat').DataTable( {
+        var table = $('#tabel-sertifikat').DataTable( {
             "ajax"  : 'dokumen/getGlob',
             "paging":  false,
             "info":  false,
@@ -128,6 +121,7 @@ $link = (empty($glob)) ? '' : $glob[0] ;
                 success: function(data){
                     if(data.status==1){
                         $('.rekomendasi').attr('href', data.data.url);
+                        $('.berhasil').attr('style','display:inline;');
                         elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil diupload!</div>');
                         setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000);
                     } else if(data.status==0){
@@ -160,6 +154,7 @@ $link = (empty($glob)) ? '' : $glob[0] ;
                     data.data.forEach(function(item, index) {
                         if (item.status==1){
                             elem.addClass('is-valid').after('<div class="valid-feedback">Berhasil mengunggah ' + item.filename + '</div>');
+                            table.ajax.reload();
                             setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 3000); 
                         } else if(item.status==0){
                             elem.addClass('is-invalid').after('<div class="invalid-feedback">Gagal mengunggah ' + item.filename + '</div>');

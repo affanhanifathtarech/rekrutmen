@@ -18,7 +18,7 @@
             method: 'GET'
         })
 
-        $('input[type=file]').change(function(e) {
+        $('#foto').change(function(e) {
             e.preventDefault();
             var elem = $(this);
             var file_data = $("#foto").prop("files")[0];   
@@ -38,6 +38,7 @@
                     if (data.status==1){
                         $('#foto_profile').attr('src', data.data.url);
                         $('.user-profile img').attr('src', data.data.url);
+                        $('#display_profil').next().removeClass('fa-times-circle text-danger').addClass('fa-check-circle text-success');
                         elem.removeClass('is-valid').next().remove();
                         elem.addClass('is-valid').after('<div class="valid-feedback text-center">Berhasil diganti!</div>');
                         setTimeout(function(){ elem.removeClass('is-valid').next().remove(); }, 5000);

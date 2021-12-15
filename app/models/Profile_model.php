@@ -36,7 +36,7 @@ class Profile_model {
         }
 
         if (!empty($ext)){
-        echo BASEURL . 'public/images/logo.webp';
+        echo BASEURL . 'public/images/user.png';
         }
     }
     

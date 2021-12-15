@@ -1,6 +1,7 @@
 <?php 
 if ($this->model('Register_model')->registData($_POST) > 0){  
     $data = $this->model('Login_model')->getUser(@$_POST['nim'], 'nim');      
+    $data2 = $this->model('Biodata_model')->getDataUser(@$_POST['nim'], 'nim', 'nama');
     $out = array(
         "status" => 1,
         "data" => array(
@@ -9,6 +10,8 @@ if ($this->model('Register_model')->registData($_POST) > 0){
     );
     $_SESSION["nim"] = $data["nim"];
     $_SESSION["id"] = $data["id"];
+    $_SESSION["nama"] = $data2["nama"];
+
     
 } else {
    $out = array(

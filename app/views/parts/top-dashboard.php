@@ -1,3 +1,14 @@
+<?php
+$glob1 = glob('public/images/user/'. $_SESSION['nim'] . ".*");
+$display['foto_profil'] = (empty($glob1)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
+
+$glob2 = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
+$display['rekomendasi'] = (empty($glob2)) ? 'style="display:none;"' : '';
+$display['tampilan_rekomendasi'] = (empty($glob2)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
+$link = (empty($glob2)) ? '' : $glob2[0] ;
+
+?>
+
 <!DOCTYPE html> 
 <html lang="id">
 <head id="head">
@@ -254,8 +265,8 @@
                 </div>
               </div>
               <div class="col-lg-8 widget-user-info">
-                <h3 class="h1 fw-bold pt-4">Affan Hanif Ath Tarech</h3>
-                <h4 class="h3 fw-italic">061830311274</h3>
+                <h3 class="h1 fw-bold pt-4"><?= $_SESSION['nama']; ?></h3>
+                <h4 class="h3 fw-italic"><?= ($_SESSION['nama']=='') ? '' : $_SESSION['nim']; ?></h3>
               </div>
             </div>
           </div>
