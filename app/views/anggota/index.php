@@ -181,19 +181,22 @@
             // } ]
             "columnDefs": [ 
                 {"targets": 3,
-                "render": function ( data, type, row, meta ) {
+                    "render": function ( data, type, row, meta ) {
+                    if(data==NULL) return '';
                     if(data==0) return 'Perempuan';
                     if(data==1) return 'Laki-Laki';
                     } 
                 },
                 {"targets": 17,
                 "render": function ( data, type, row, meta ) {
+                    if(data==NULL) return '';
                     if(data==0) return 'Merantau';
                     if(data==1) return 'Tidak Merantau';
                     }
                 },
                 {"targets": 18,
                 "render": function ( data, type, row, meta ) {
+                    if(data==NULL) return '';
                     if(data==0) return 'Pagi';
                     if(data==1) return 'Siang';
                     if(data==2) return 'Malam';
@@ -201,18 +204,21 @@
                 },
                 {"targets": 19,
                 "render": function ( data, type, row, meta ) {
+                    if(data==NULL) return '';
                     if(data==0) return 'Tidak Pernah';
                     if(data==1) return 'Pernah';
                     }
                 },
                 {"targets": 20,
                 "render": function ( data, type, row, meta ) {
+                    if(data==NULL) return '';
                     if(data==0) return 'Tidak Pernah';
                     if(data==1) return 'Pernah';
                     }
                 },
                 {"targets": 24,
                 "render": function ( data, type, row, meta ) {
+                    if(data==NULL) return '';
                     if(data==0) return 'Lainnya';
                     if(data==1) return 'Bidik Misi';
                     if(data==2) return 'Beasiswa KIP';

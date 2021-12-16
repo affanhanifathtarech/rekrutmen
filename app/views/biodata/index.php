@@ -211,10 +211,12 @@
 <script>
     function prodi(jurusan) 
     {
+        $('#prodi').children().remove();
+        $('#prodi').append('<option selected value="NULL" hidden>Pilih Program Studi</option>');
+
         switch (jurusan) 
         {
             case 'Teknik Elektro':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Listrik (D3)") ? "selected" : ""?> value="Teknik Listrik (D3)">Teknik Listrik (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Elektronika (D3)") ? "selected" : ""?> value="Teknik Elektronika (D3)">Teknik Elektronika (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Telekomunikasi (D3)") ? "selected" : ""?> value="Teknik Telekomunikasi (D3)">Teknik Telekomunikasi (D3)</option>');
@@ -223,57 +225,61 @@
             break;
 
             case 'Teknik Sipil':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Sipil (D3)") ? "selected" : ""?> value="Teknik Sipil (D3)">Teknik Sipil (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Perancangan Jalan dan Jembatan (D4)") ? "selected" : ""?> value="Perancangan Jalan dan Jembatan (D4)">Perancangan Jalan dan Jembatan (D4)</option>');
             break;
 
             case 'Teknik Mesin':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Mesin (D3)") ? "selected" : ""?> value="Teknik Mesin (D3)">Teknik Mesin (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Mesin Produksi Perawatan (D4)") ? "selected" : ""?> value="Teknik Mesin Produksi Perawatan (D4)">Teknik Mesin Produksi Perawatan (D4)</option>');
             break;
 
             case 'Teknik Kimia':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Kimia (D3)") ? "selected" : ""?> value="Teknik Kimia (D3)">Teknik Kimia (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Energi (D4)") ? "selected" : ""?> value="Teknik Energi (D4)">Teknik Energi (D4)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Kimia Industri (D4)") ? "selected" : ""?> value="Teknik Kimia Industri (D4)">Teknik Kimia Industri (D4)</option>');
             break;
 
             case 'Akuntansi':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Akuntansi (D3)") ? "selected" : ""?> value="Akuntansi (D3)">Akuntansi (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Akuntansi Sektor Publik (D4)") ? "selected" : ""?> value="Akuntansi Sektor Publik (D4)">Akuntansi Sektor Publik (D4)</option>');
             break;
 
             case 'Administrasi Bisnis':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Administrasi Bisnis (D3)") ? "selected" : ""?> value="Administrasi Bisnis (D3)">Administrasi Bisnis (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Usaha Perjalanan Wisata (D4)") ? "selected" : ""?> value="Usaha Perjalanan Wisata (D4)">Usaha Perjalanan Wisata (D4)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Manajemen Bisnis (D4)") ? "selected" : ""?> value="Manajemen Bisnis (D4)">Manajemen Bisnis (D4)</option>');
             break;
 
             case 'Teknik Komputer':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Komputer (D3)") ? "selected" : ""?> value="Teknik Komputer (D3)">Teknik Komputer (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Teknik Informatika Multimedia Digital (D4)") ? "selected" : ""?> value="Teknik Informatika Multimedia Digital (D4)">Teknik Informatika Multimedia Digital (D4)</option>');
             break;
 
             case 'Manajemen Informatika':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Manajemen Informatika (D3)") ? "selected" : ""?> value="Manajemen Informatika (D3)">Manajemen Informatika (D3)</option>');
             $('#prodi').append('<option <?= ($data["prodi"]=="Manajemen Informatika (D4)") ? "selected" : ""?> value="Manajemen Informatika (D4)">Manajemen Informatika (D4)</option>');
             break;
 
             case 'Bahasa Inggris':
-            $('#prodi').children().remove();
             $('#prodi').append('<option <?= ($data["prodi"]=="Bahasa Inggris (D3)") ? "selected" : ""?> value="Bahasa Inggris (D3)">Bahasa Inggris (D3)</option>');
             break;
         }
     }
 
     $(function() {
+        if ('<?=$data["jk"];?>'=='') { $('#jk').append('<option selected value="NULL" hidden>Pilih Jenis Kelamin</option>'); }
+        if ('<?=$data["prodi"];?>'=='') { $('#prodi').append('<option selected value="NULL" hidden>Pilih Jurusan Terlebih Dahulu</option>'); }
+        if ('<?=$data["jurusan"];?>'=='') { $('#jurusan').append('<option selected value="NULL" hidden>Pilih Jurusan</option>'); }
+        if ('<?=$data["angkatan"];?>'=='') { $('#angkatan').append('<option selected value="NULL" hidden>Pilih Angkatan</option>'); }
+        if ('<?=$data["goldar"];?>'=='') { $('#goldar').append('<option selected value="NULL" hidden>Pilih Golongan Darah</option>'); }
+        if ('<?=$data["status_tinggal"];?>'=='') { $('#status_tinggal').append('<option selected value="NULL" hidden>Pilih Status Tinggal</option>'); }
+        if ('<?=$data["rohis"];?>'=='') { $('#rohis').append('<option selected value="NULL" hidden>Pilih Status Rohis</option>'); }
+        if ('<?=$data["liqo"];?>'=='') { $('#liqo').append('<option selected value="NULL" hidden>Pilih Status Liqo</option>'); }
+        if ('<?=$data["status_pendidikan"];?>'=='') { $('#status_pendidikan').append('<option selected value="NULL" hidden>Pilih Status Pendidikan</option>'); }
+        if ('<?=$data["status_kelas"];?>'=='') { $('#status_kelas').append('<option selected value="NULL" hidden>Pilih Status Kelas</option>'); }
+        if ('<?=$data["div1"];?>'=='') { $('#div1').append('<option selected value="NULL" hidden>Pilih Divisi 1</option>'); }
+        if ('<?=$data["div2"];?>'=='') { $('#div2').append('<option selected value="NULL" hidden>Pilih Divisi 2</option>'); }
         prodi('<?= $data['jurusan']; ?>');
 
         $('input,select,textarea').change(function(e) {

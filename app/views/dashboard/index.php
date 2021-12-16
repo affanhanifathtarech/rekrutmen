@@ -71,6 +71,7 @@ $display['biodata'] = $doc->saveHTML();
                       <span class="badge bg-cyan mr-2">1</span>
                       <a href="biodata" class="nav-link" style="display:inline; padding:unset;">Lengkapi Biodata</a>   
                       <span class="badge rounded-pill bg-danger"><?= $isNull; ?></span>
+                      <i class="fas fa-chevron-circle-down float-right" data-bs-toggle="collapse" href="#biodata" type="button" aria-expanded="false" aria-controls="biodata"></i>
                       <ol class="list-group-numbered collapse" id="biodata">
                         <?= $display['biodata']; ?>
                       </ol>
