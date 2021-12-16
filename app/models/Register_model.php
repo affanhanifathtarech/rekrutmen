@@ -13,7 +13,7 @@ class Register_model {
     {
         $query = "
         INSERT INTO `user` VALUES ('', :nim, :password); 
-        INSERT INTO `biodata` (id, nim, nama, wa, jk, jurusan, prodi, kelas, angkatan, tempat_lahir, tanggal_lahir, goldar, alamat, anak_ke, ayah, ibu, kerja_ayah, kerja_ibu, status_tinggal, status_kelas, rohis, liqo, organisasi, hobi, email, status_pendidikan, alasan_gabung, minat_bakat, div1, alasan_div1, div2, alasan_div2) VALUES ('', :nim, '', :wa, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+        INSERT INTO `biodata` (id, nim, nama, wa, jk, jurusan, prodi, kelas, angkatan, tempat_lahir, tanggal_lahir, goldar, alamat, anak_ke, ayah, ibu, kerja_ayah, kerja_ibu, status_tinggal, status_kelas, rohis, liqo, organisasi, hobi, email, status_pendidikan, alasan_gabung, minat_bakat, div1, alasan_div1, div2, alasan_div2) VALUES ('', :nim, NULL, :wa, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         ";
         $this->db->query($query);
         $this->db->bind('nim', $data['nim']);
@@ -23,4 +23,5 @@ class Register_model {
 
         return $this->db->rowCount();
     }
+    
 }

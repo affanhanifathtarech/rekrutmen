@@ -16,4 +16,5 @@ class Biodata extends Controller {
     public function update(){
         $this->ajax('ajax-biodata');
     }
+
 }

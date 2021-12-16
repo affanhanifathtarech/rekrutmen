@@ -199,7 +199,6 @@
 
     <!-- /.last of main content -->
 
-
 <!-- PAGE BOTTOM SECTION (required)-->
 <?php require_once 'app/views/parts/bottom-dashboard.php'; ?>
 <!-- MAIN SCRIPT -->

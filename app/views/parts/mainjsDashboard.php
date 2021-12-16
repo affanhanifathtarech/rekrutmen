@@ -25,7 +25,7 @@
             var foto_lama = $("#foto_profile").attr('src');
             var form_data = new FormData();
             if ('<?= $data['url'];?>' == 'detail' ) {
-                var nim = '<?= $data['nim'];?>';
+                var nim = '<?= @$data['nim'];?>';
             } else {
                 var nim = '<?= $_SESSION['nim'];?>';
             }

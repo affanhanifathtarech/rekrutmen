@@ -1,13 +1,3 @@
-<?php
-$glob1 = glob('public/images/user/'. $_SESSION['nim'] . ".*");
-$display['foto_profil'] = (empty($glob1)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
-
-$glob2 = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
-$display['rekomendasi'] = (empty($glob2)) ? 'style="display:none;"' : '';
-$display['tampilan_rekomendasi'] = (empty($glob2)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
-$link = (empty($glob2)) ? '' : $glob2[0] ;
-?>
-
 <!DOCTYPE html> 
 <html lang="id">
 <head id="head">

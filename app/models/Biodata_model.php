@@ -21,5 +21,25 @@ class Biodata_model {
         $this->db->execute();
         return $this->db->rowCount();
     }
+
+    public function isNull($column, $nim){ 
+        $query = "SELECT * FROM " . $this->table . " WHERE nim = :nim AND $column IS NULL";
+        $this->db->query($query);
+        $this->db->bind('nim', $nim);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
  
+    public function getColumnNames(){
+        $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = :table";
+        $this->db->query($query);
+        $this->db->bind('table', 'biodata');
+        $this->db->execute();
+        $rows = $this->db->getAllData();
+        $output = array();
+        foreach ($rows as $key => $row) {
+            $output[] = $rows[$key]['COLUMN_NAME'];                
+        }
+        return $output; 
+    }
 }
