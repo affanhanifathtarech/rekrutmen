@@ -5,7 +5,7 @@ $filename= explode('/', $file);
 $filename = end($filename);
 $filename = explode('.', $filename)[0];
 
-if (intval($filename)+60 < time()) {
+if (intval($filename)+60*60*24 < time()) {
 unlink($file);
 $response = file_get_contents('https://www.instagram.com/ldk_karisma/?__a=1');
 $insta = json_decode($response);

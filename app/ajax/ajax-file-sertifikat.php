@@ -12,7 +12,7 @@ foreach ($_FILES as $key) {
         $eks = explode('.', $name);
         $eks = strtolower(end($eks));
         $filename = explode(".$eks",$name)[0];
-        move_uploaded_file($temp, $path . $_SESSION["nim"] . " - " . time() . " - " . $filename . ".$eks");
+        move_uploaded_file($temp, $path . time() . "-" . $filename . ".$eks");
         $status = 1;
     }else{
         $status = 0;

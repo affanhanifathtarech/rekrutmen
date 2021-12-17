@@ -19,6 +19,10 @@ class Dokumen extends Controller {
         $this->ajax('ajax-file-sertifikat');
     }
 
+    public function hapusSertifikat(){
+        return (unlink($_POST['dir'])) ? 'berhasil' : 'gagal';
+    }
+
     public function getGlob(){
         $this->ajax('ajax-glob-dir');
     }

@@ -3,11 +3,7 @@ $glob1 = glob('public/images/user/'. $_SESSION['nim'] . ".*");
 $display['foto_profil'] = (empty($glob1)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
 
 $glob2 = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
-$display['rekomendasi'] = (empty($glob2)) ? 'style="display:none;"' : '';
 $display['tampilan_rekomendasi'] = (empty($glob2)) ? '<i class="fas fa-times-circle text-danger"></i>' : '<i class="berhasil fas fa-check-circle text-success"></i>';
-$link = (empty($glob2)) ? '' : $glob2[0] ;
-
-// $display['biodata'] = ($isNull);
 
 $doc = new DOMDocument;
 $columns = $this->model("Biodata_model")->getColumnNames();
@@ -21,6 +17,11 @@ foreach ($columns as $key => $value) {
   }
 }
 
+if($isNull) {
+  $display['biodata_count'] = '<span class="badge rounded-pill bg-danger">'. $isNull .'</span>';
+} else {
+  $display['biodata_count'] = '<i class="berhasil fas fa-check-circle text-success"></i>'; 
+}
 $display['biodata'] = $doc->saveHTML();
 ?>
 
@@ -28,40 +29,8 @@ $display['biodata'] = $doc->saveHTML();
     <div class="main-content content m-auto">
       <div class="container-fluid">
         <div class="row">
-          
-        <div class="col-lg-4">
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h5 class="m-0">Ringkasan Biodata</h5>
-                </div>
-                <div class="card-body py-3">
-                  <table class='ringkasan-biodata'>
-                    <tr>
-                      <td><i class="fas fa-graduation-cap"></i></td>
-                      <td>Jurusan Teknik Elektro</td>
-                    </tr>
-                    <tr>
-                      <td><i class="fas fa-user-graduate"></i></td>
-                      <td>Prodi Teknik Listrik</td>
-                    </tr>
-                    <tr>
-                      <td><i class="fas fa-birthday-cake"></i></td>
-                      <td>Lahir di <strong>Prabumulih</strong></td>
-                    </tr>
-                    <tr>
-                      <td><i class="fas fa-heart"></i></td>
-                      <td>Golongan Darah <strong>O</strong></td>
-                    </tr>
-                    <tr>
-                      <td><i class="fab fa-whatsapp"></i></td>
-                      <td>082269599529</td>
-                    </tr>
-                  </table>
-                </div>
-            </div>
-          </div>
 
-          <div class="col-lg-8">
+          <div class="col-lg-12">
 
             <div class="card">
                 <!-- /.card-header -->
@@ -70,7 +39,7 @@ $display['biodata'] = $doc->saveHTML();
                     <li class="list-group-item px-1">
                       <span class="badge bg-cyan mr-2">1</span>
                       <a href="biodata" class="nav-link" style="display:inline; padding:unset;">Lengkapi Biodata</a>   
-                      <span class="badge rounded-pill bg-danger"><?= $isNull; ?></span>
+                      <?= $display['biodata_count']; ?>
                       <i class="fas fa-chevron-circle-down float-right" data-bs-toggle="collapse" href="#biodata" type="button" aria-expanded="false" aria-controls="biodata"></i>
                       <ol class="list-group-numbered collapse" id="biodata">
                         <?= $display['biodata']; ?>

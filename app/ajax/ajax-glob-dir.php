@@ -4,10 +4,10 @@ $files = [];
 $sertifikat = glob('public/dokumen/sertifikat/' . $_SESSION['nim'] . "/*");
 $length = count($sertifikat);
     foreach ($sertifikat as $key => $value) {
-        $file = explode('public/dokumen/sertifikat/'. $_SESSION["nim"] . '/' .$_SESSION["nim"] . ' - ', $value)[1];
+        $file = explode('public/dokumen/sertifikat/'. $_SESSION["nim"] . '/', $value)[1];
         $files[$key]['id'] = $length-$key;
-        $files[$key]['timestamp'] = explode(' - ', $file)[0];
-        $files[$key]['filename'] = explode(' - ', $file)[1];
+        $files[$key]['timestamp'] = explode('-', $file)[0];
+        $files[$key]['filename'] = explode($files[$key]['timestamp'].'-', $file)[1];
         $files[$key]['dir'] = $value;
     }
 

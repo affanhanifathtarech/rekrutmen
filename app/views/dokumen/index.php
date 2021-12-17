@@ -1,3 +1,9 @@
+<?php
+$glob2 = glob('public/dokumen/rekomendasi/*'. $_SESSION['nim'] . ".*");
+$display['rekomendasi'] = (empty($glob2)) ? 'style="display:none;"' : '';
+$link = (empty($glob2)) ? '' : $glob2[0] ;
+?>
+
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <style>
 ::-webkit-scrollbar {
@@ -68,6 +74,23 @@
       </div>
     </div>
 
+<div class="modal fade" id="modal-hapus" tabindex="-1" aria-labelledby="modal-hapusLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hapus File</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body hapus">
+        <p>Yakin hapus file</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger btn-hapus" data-bs-dismiss="modal">Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php require_once 'app/views/parts/mainjs.php'; ?>
 <?php require_once 'app/views/parts/mainjsDashboard.php'; ?>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -75,6 +98,29 @@
 
 <script>
     $(function(){
+        var modal = document.getElementById('modal-hapus')
+        modal.addEventListener('show.bs.modal', function (e) {
+            var filename = $(e.relatedTarget).data('filename');
+            var dir = $(e.relatedTarget).data('dir');
+            $('.hapus p').html('Yakin hapus file <b>'+filename+'</b> ?');
+            $('.btn-hapus').data('dir', dir);
+        });
+
+        $('.btn-hapus').click(function() {
+            var dir = $('.btn-hapus').data('dir');
+            console.log(dir);
+            $.ajax({
+                url: "dokumen/hapusSertifikat",
+                method: 'POST',
+                data: {
+                    dir : dir
+                },                      
+                success: function(data){
+                    table.ajax.reload();
+                }
+            });
+        })
+
         var table = $('#tabel-sertifikat').DataTable( {
             "ajax"  : 'dokumen/getGlob',
             "paging":  false,
@@ -93,7 +139,7 @@
                 {
                 "targets": 3,
                 "render": function ( data, type, row, meta ) {
-                    return '<a href="'+ row['dir'] +'" ><span class="btn btn-xs btn-info">buka</span></a><span class="btn btn-xs btn-danger ml-2" data-toggle="modal" data-target="#modal-hapus" data-hapus="">hapus</span>';
+                    return '<a href="'+ row['dir'] +'" ><span class="btn btn-xs btn-info">buka</span></a><span class="btn btn-xs btn-danger ml-2" type="button" data-bs-toggle="modal" data-bs-target="#modal-hapus" data-filename="'+row['filename']+'" data-dir="'+row['dir']+'">hapus</span>';
                     }
                 },
                 {
